@@ -1,13 +1,89 @@
-\documentclass[twocolumn]{article}
+\documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{relsize}
 
-\title{Internship Journal}
-\author{Lydia Harris}
-\date{Week of 2019}
+\title{So You Want to do Materials Research:\\[0.02em]\smaller{}a
+guide to aBuild and the skills you need to use it}
+\author{Lydia Harris and Eli Harris}
 
 \begin{document}
 
 \maketitle
+
+\section{Bash Commands}
+
+First things first, you need to learn to navigate your command
+line. Macs have a built in command line, but on Windows you will need
+to download one first. Ubuntu works great.
+
+\begin{table}
+        \begin{center}
+                \caption{Bash commands and what they mean}
+                \label{bashcommands}
+                \begin{tabular}{l|r}
+                        \textbf{Command} & \textbf{What it does}\\
+                        \hline
+                        ls & list contents of current directory \\
+                        ls -a & show hidden files too \\
+                        mkdir directory & make a new directory \\
+                        cd directory & change directory \\
+                        cd .. & go back a directory \\
+                        cd ../.. & go back two directories \\
+                        cd ~ & go to your root \\
+                        pwd & print working directory \\
+                        ~/ & means your root \\
+                        . & means the current directory \\
+                        cp file/to/copy where/it/goes/newName & copy
+                        a file \\
+                        cp file/to/copy . & copy a file to current
+                        directory without \\
+                         & changing the name \\
+                        cp files/* . & copy all the files in a
+                        directory \\
+                         & to the current directory \\
+                        cp -r directory new/directory & copy a
+                        directory recursively \\
+                        rm file/to/remove & remove a file \\
+                        rmdir directory & remove a directory \\
+                        rm -rf directory & blow away a directory
+                        permanently \\
+                        mv file/to/move where/it/goes/newName & moves
+                        or renames a file \\
+                        man command & show the manual for a command \\
+                        cat file/one file/two \textgreater new/file & concatonate
+                        two or more files into a new file \\
+                        history & shows a history of your commands \\
+                        less file/to/see & shows one page of a file \\
+                         & space turns the page q quits \\
+                        head file/to/see & see the first page of a file \\
+                        head -n 8 file/to/see & see the first 8 lines
+                        of a file \\
+                        tail file/to/see & see the last page of a file
+                        \\
+                        tail -n 10 file/to/see & see the last 10 lines
+                        of a file \\
+                        grep keyword file/to/search & search a file
+                        for a keyword and \\
+                         & print all the lines with that keyword to the screen \\
+                        history | grep keyword & search your history
+                        for a keyword \\
+                        grep keyword file/to/search \textbar wc -l & count
+                        the occurences of lines with a keyword \\
+                        command \textbar less & pipe the output of a command
+                        to less \\
+                        command \textgreater \textgreater file & append the output of a
+                        command to a file \\
+                        command \textgreater file & writes the output of the
+                        command to a file \\
+                        !command & executes the most recent command
+                        that \\
+                         & starts with the letters you typed \\
+                        echo & print something to the screen \\
+                 \end{tabular}
+        \end{center}
+\end{table}
+                        
+                        
 
 
 
