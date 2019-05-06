@@ -15,7 +15,8 @@ guide to aBuild and the skills you need to use it}
 
 First things first, you need to learn to navigate your command
 line. Macs have a built in command line (terminal), but on Windows you will need
-to download one first. The Ubuntu app works great.
+to download one first. The Ubuntu app works great. See
+\ref{bashcommands} for a list of helpful commands. 
 
 \begin{table}
         \begin{center}
@@ -26,6 +27,8 @@ to download one first. The Ubuntu app works great.
                         \hline
                         ls & list contents of current directory \\
                         ls -a & show hidden files too \\
+                        ls -altr & see the last changes made to the \\
+                         & files in a directory \\
                         mkdir directory & make a new directory \\
                         cd directory & change directory \\
                         cd .. & go back a directory \\
@@ -80,9 +83,194 @@ to download one first. The Ubuntu app works great.
                         that \\
                          & starts with the letters you typed \\
                         echo & print something to the screen \\
+                  
                  \end{tabular}
         \end{center}
 \end{table}
+
+\section{Emacs}
+
+Emacs is a text editor that has a bunch of cool shortcuts you can
+learn to make editing documents super easy. On a Mac you can download
+Aquamacs, which uses the same commands as Emacs but you can click with
+your mouse. \ref{emacsChart} Has a chart of basic Emacs
+commands. \ref{AquamacsChart} has a list of Aquamacs specific things. 
+
+\begin{table}
+        \begin{center}
+                \caption{Emacs commands and what they mean}
+                \label{emacsChart}
+                \begin{tabular}{l|r}
+                  \textbf{Command} & \textbf{What it does}\\
+                  \hline
+                  emacs path/to/file & enter emacs editor for
+                                             existing file \\
+                   & or creates new file with that name \\
+                  ctrl+x ctrl+c y & save and quit a file \\
+                  ctrl+x ctrl+c n & quit without saving \\
+                  ctrl+w & cut a line \\
+                  ctrl+y & paste a line \\
+                  ctrl+k & kills the contents of a line \\
+                  ctrl+k ctrl+k & kills a whole line \\
+                 \end{tabular}
+        \end{center}
+\end{table}
+
+\begin{table}
+        \begin{center}
+                \caption{Extra things in Aquamacs}
+                \label{AquamacsChart}
+                \begin{tabular}{l|r}
+                  \textbf{Command} & \textbf{What it does}\\
+                  \hline
+                  ctrl+x ctrl+f & find and open a file (at the \\
+                   & bottom of the screen) \\
+                 \end{tabular}
+        \end{center}
+\end{table}
+
+\section{Bash Loops}
+
+Here's a table \ref{bashloops} of basic bash loops and logic, and a
+basic example \ref{loopexample} that relates to what we do.
+
+\begin{table}
+        \begin{center}
+                \caption{Loops in Bash}
+                \label{bashloops}
+                \begin{tabular}{l|r}
+                  \textbf{Command} & \textbf{What it does}\\
+                  \hline
+                  \verb|for i in {1..100}| & for 100 iterations\\
+                  \verb|do|
+                  \verb|command $i| & do this thing \verb|$i| \\
+                  \verb|done| & references the index \\
+                  \hline
+                  \verb|if [ condition ]| & check the condition \\
+                  \verb|then| & if it's true \\
+                  \verb|command| & do this \\
+                  \verb|else| & if it's not \\
+                  \verb|command| & do this \\
+                  \verb|fi| & \\
+                  \hline
+                  \verb|if [ -e file ] |& check if a file exists \\
+                 \end{tabular}
+        \end{center}
+      \end{table}
+      
+\begin{table}
+        \begin{center}
+                \caption{Example}
+                \label{loopexample}
+                \begin{tabular}{l|r}
+                  \textbf{Command} & \textbf{What it does}\\
+                  \hline
+                  \verb|for i in {1..100}| & for 100 times \\
+                  \verb|do|
+                  \verb|cd E.$i| & enter the directory named
+                                   \verb|E.#|\\
+                  \verb|if [ -e KPOINTS ]| & if KPOINTS doesn't exist
+                  \\
+                  \verb|echo $i| & print the directory number \\
+                  \verb|getKPoints| & run the getKPoints script \\
+                  \verb|fi|
+                  \verb|cd ..| & go back one directory \\
+                  \verb|done|
+                 \end{tabular}
+        \end{center}
+\end{table}
+
+
+%%%% DON'T KNOW WHERE THIS BELONGS IN THIS DOCUMENT BUT I'M GONNA TYPE
+%%%% IT UP SO THAT WE HAVE IT AND CAN PLACE IT LATER
+
+How to make and use a virtual environment to run python interactively, table \ref{venv}.
+
+\begin{table}
+        \begin{center}
+                \caption{Example}
+                \label{venv}
+                \begin{tabular}{l|r}
+                  \textbf{Command} & \textbf{What it does}\\
+                  \hline
+                  \verb|mkdir environments| & make a directory to \\
+                                   & hold your environments \\
+                  \verb|cd environments| & go to that directory \\
+                  \verb|python -m venv name_of_env| & make the
+                                                      environment \\
+                  \verb|emacs .bash_profile| & edit your
+                                               \verb|.bash_profile|\\
+                  \verb|function work on {| & add these lines to it \\
+                  \verb| source ~/environments/$1/bin/activate| & \\
+                  \verb|}|
+                  ctrl+x ctrl+c y & save and quit the editor \\
+                  source \verb|.bash_profile| & update your
+                                                \verb|.bash_profile|\\
+                  \verb|workon name_of_env| & enters your environment
+                  \\
+                  ctrl+d & exits your environment \\
+                \end{tabular}
+        \end{center}
+\end{table}
+
+\section{Basics of Github}
+
+This section is by no means comprehensive. In fact, there's probably a
+lot of things missing. If you'd like to actually get good at Github,
+you have a lot more work to do. But here's some basics.
+
+The basic idea of Github is that several people can work on the same
+code at the same time. You can have a copy of the code on your machine
+to work on, and you can push your changes to the main copy of the
+code. Most people, however, don't have their repositories open to the
+public to edit. They will have to clear any suggested changes that you
+push. But as they make edits, you can pull their copy down to your
+machine. Github will warn you if there are any changes you have made
+to the code that will be overwritten by copying their changes. It's a
+powerful code sharing tool, but takes a little getting used to. 
+
+First you need to go make a Github account. Then you can fork (make a
+copy of) whatever repository of code that you want to copy and
+edit. If you don't want to make edits to the code yourself, you don't
+have to make a fork, you can just copy directory from the original
+repository each time.
+To give your computer (or a remote computer) access to your repositories
+on Github, add your computer's public SSH key to Github. How to do
+this:
+On your command line execute the following command to copy
+your public ssh key:
+\begin{verbatim}
+pbcopy < ~/.ssh/id_rsa.pub
+\end{verbatim}
+If this didn't work, it means you don't have a public key and will
+need to generate one.
+%%%%%WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
+%%%%%WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
+Now you will be able to paste this key into your account on Github. To
+do this, go to Settings>SSH and GPG keys>New SSH key. Make sure you
+name it something intuitive (e.g. My Mac, Marylou, etc.).
+
+Now you can make a copy of this code on your machine. It's probably a
+good idea to make a directory to hold all the stuff you're going to
+copy. Usually this is in \verb|~/codes/|. If you just want to make a
+copy of the code and don't expect any changes to be made to it, use
+the following command:
+\begin{verbatim}
+git clone git@github.com:user/repository.git
+\end{verbatim}
+If you made your own fork and  expect to make changes to the code, add
+a master copy of your fork to your machine using the following command:
+\begin{verbatim}
+git remote add master git@github.com:user/repository.git
+\end{verbatim}
+If you want to be able to add someone else's version of the code to
+your machine, the convention is to call their repository
+\verb|upstream|. You can add access to their repository to your
+machine with the following command:
+\begin{verbatim}
+git remote add upstream git@github.com:user/repository.git
+\end{verbatim}
+
                         
 \section{Initialization Process}
 \subsection{git download}
