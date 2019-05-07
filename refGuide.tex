@@ -112,6 +112,8 @@ commands. \ref{AquamacsChart} has a list of Aquamacs specific things.
                   ctrl+y & paste a line \\
                   ctrl+k & kills the contents of a line \\
                   ctrl+k ctrl+k & kills a whole line \\
+                  ctrl+shift+- & undo \\
+                  ctrl+u 3 command & executes the command 3 times \\
                  \end{tabular}
         \end{center}
 \end{table}
@@ -188,7 +190,7 @@ How to make and use a virtual environment to run python interactively, table \re
 
 \begin{table}
         \begin{center}
-                \caption{Example}
+                \caption{Build a virtual environment}
                 \label{venv}
                 \begin{tabular}{l|r}
                   \textbf{Command} & \textbf{What it does}\\
@@ -285,13 +287,14 @@ your machine with the following command:
 git remote add upstream git@github.com:user/repository.git
 \end{verbatim}
 
-Now that you have a copy of the code, I'll tell you how to make
-changes to the code on your machine, and on Github from your
-machine. Here's a list of some basic Git commands \ref{git}.
+Now that you have a copy of the code, here's how to make changes to
+the code on your machine, and on Github from your machine. Here's a
+list of some basic Git commands \ref{git}. Remember that this is not a
+comprehensive list.
 
 \begin{table}
         \begin{center}
-                \caption{Example}
+                \caption{Basic Github Commands}
                 \label{git}
                 \begin{tabular}{l|r}
                   \textbf{Command} & \textbf{What it does}\\
@@ -311,12 +314,17 @@ machine. Here's a list of some basic Git commands \ref{git}.
                                    & leave a comment\\
                   git commit -m \verb|"comment"|& commit the changes
                                                   you added \\
-                   & and leave a comment \\
-                  git push %%%this isn't done yet, figure it out
+                                   & and leave a comment \\
+                  git push & pushes your latest commit \\
+                                   & to your fork on Git \\
+                  git push master upstream & push your
+                                             request \\
+                                   & to add your changes to upstream \\
                 \end{tabular}
         \end{center}
 \end{table}
 
+Note: Atlassian has a good Git tutorial and reference guide. 
 
 \subsection{SSH key generation}
 %%%%%WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
@@ -328,6 +336,51 @@ machine. Here's a list of some basic Git commands \ref{git}.
 \subsubsection{bin directory}
 \section{Training Process}                      
 
+\section{aBuild tags} %I don't know if this needs to be it's own
+                      %section. Just wanted to make a table of
+                      %dependencies and didn't know where it should
+                      %go.
 
+%%%%%The following two tables might be better suited to be
+%%%%%combined. It would create the dependencies for the workflow so
+%%%%%you'd know what order to execute all the commands in.
+\begin{table}
+        \begin{center}
+                \caption{aBuild tag Dependencies}
+                \label{aBuilddepend}
+                \begin{tabular}{l|c|r}
+                  \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\
+                  \hline
+                  -write & .yml file & VASP input files \\
+                  -setup_train & VASP output files & train.cfg \\
+                   & Potential.mtp & pot.mtp \\
+                  -setup_relax & %I think something goes here but not
+                  % sure
+                                                  & to_relax.cfg \\
+                                & & relax.ini \\
+                  -setep_select_add & %???
+                                                  & candidate.cfg \\
+                  -add & new_training.cfg & VASP input files \\
+                \end{tabular}
+        \end{center}
+\end{table}
+
+\begin{table}
+        \begin{center}
+                \caption{mlp Command Dependencies}
+                \label{mlpdepend}
+                \begin{tabular}{l|c|r}
+                  \textbf{Command:} & \textbf{Needs:} & \textbf{Generates:}\\
+                  \hline
+                  train & train.cfg & Potential.mtp \\
+                                    & pot.mtp & \\
+                  relax & to_relax.cfg & relaxed.cfg \\
+                                    & relax.ini & unrelaxed.cfg \\
+                                    & pot.mtp & candidates.cfg \\
+                  select-add & train.cfg & new_training.cfg \\
+                   & candidate.cfg & \\
+                \end{tabular}
+        \end{center}
+\end{table}
 
 \end{document}
