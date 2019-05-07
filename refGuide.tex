@@ -220,14 +220,16 @@ lot of things missing. If you'd like to actually get good at Github,
 you have a lot more work to do. But here's some basics.
 
 The basic idea of Github is that several people can work on the same
-code at the same time. You can have a copy of the code on your machine
-to work on, and you can push your changes to the main copy of the
-code. Most people, however, don't have their repositories open to the
-public to edit. They will have to clear any suggested changes that you
-push. But as they make edits, you can pull their copy down to your
+code at the same time. It also has version control: if you don't like
+the recent changes to your code, you can get rid of them by going back
+to an old version of the code. You can have a copy of the code on your
+machine to work on, and you can push your changes to the main copy of
+the code. Most people, however, don't have their repositories open to
+the public to edit. They will have to clear any suggested changes that
+you push. But as they make edits, you can pull their copy down to your
 machine. Github will warn you if there are any changes you have made
 to the code that will be overwritten by copying their changes. It's a
-powerful code sharing tool, but takes a little getting used to. 
+powerful code sharing tool, but takes a little getting used to.
 
 First you need to go make a Github account. Then you can fork (make a
 copy of) whatever repository of code that you want to copy and
@@ -242,35 +244,83 @@ your public ssh key:
 \begin{verbatim}
 pbcopy < ~/.ssh/id_rsa.pub
 \end{verbatim}
-If this didn't work, it means you don't have a public key and will
-need to generate one.
-%%%%%WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
-%%%%%WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
+Note: If this didn't work, it means you don't have a public key and will
+need to generate one. See the subsection below this for instructions
+on how to do that. 
+
 Now you will be able to paste this key into your account on Github. To
 do this, go to Settings>SSH and GPG keys>New SSH key. Make sure you
 name it something intuitive (e.g. My Mac, Marylou, etc.).
 
-Now you can make a copy of this code on your machine. It's probably a
-good idea to make a directory to hold all the stuff you're going to
-copy. Usually this is in \verb|~/codes/|. If you just want to make a
-copy of the code and don't expect any changes to be made to it, use
-the following command:
+Now you can copy code from Github to your machine. It's
+probably a good idea to make a directory to hold all the stuff you're
+going to copy with a name you'll recognize later (e.g. \verb|aBuild/|
+for aBuild, etc.). Usually these directories are in
+\verb|~/codes/|. Now there are several scenarios involving the code
+you're copying from Github. Here's a couple and what to do about them:
+
+1. If you just want to make a copy of the code and don't
+expect any changes to be made to it (like ever), use the following command:
 \begin{verbatim}
 git clone git@github.com:user/repository.git
 \end{verbatim}
-If you made your own fork and  expect to make changes to the code, add
-a master copy of your fork to your machine using the following command:
+You can do this over and over again, it will just overwrite the code
+you copied to your machine. 
+
+2.a. If you expect to make your own changes to the code, start by making
+a fork of the original code on Github. Then add a master copy of your
+fork to your machine using the following command:
 \begin{verbatim}
 git remote add master git@github.com:user/repository.git
 \end{verbatim}
-If you want to be able to add someone else's version of the code to
+2.b. If you have your own code that you would like to edit and put on
+Github for others to see, you will have to make your own repository on
+Github, then use the same command as above.
+
+3. If you want to be able to add someone else's updates to the code to
 your machine, the convention is to call their repository
-\verb|upstream|. You can add access to their repository to your
-machine with the following command:
+\verb|upstream|. You can add read only access to their repository to
+your machine with the following command:
 \begin{verbatim}
 git remote add upstream git@github.com:user/repository.git
 \end{verbatim}
 
+Now that you have a copy of the code, I'll tell you how to make
+changes to the code on your machine, and on Github from your
+machine. Here's a list of some basic Git commands \ref{git}.
+
+\begin{table}
+        \begin{center}
+                \caption{Example}
+                \label{git}
+                \begin{tabular}{l|r}
+                  \textbf{Command} & \textbf{What it does}\\
+                  \hline
+                  git checkout file/to/update & make a copy of upstream's \\
+                                   & version of the file on your machine \\
+                  git pull upstream master & update your master copy
+                                             with \\
+                                   & upstream's version \\
+                  git status & tells you the status of each file on \\
+                                   & your machine with Github's copy
+                  git add file/to/add & add your version of the file
+                                   & to the commit \\
+                  git commit & commit the changes
+                               you added. \\
+                                   & Will open an editor for you to \\
+                                   & leave a comment\\
+                  git commit -m \verb|"comment"|& commit the changes
+                                                  you added \\
+                   & and leave a comment \\
+                  git push %%%this isn't done yet, figure it out
+                \end{tabular}
+        \end{center}
+\end{table}
+
+
+\subsection{SSH key generation}
+%%%%%WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
+%%%%%WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
                         
 \section{Initialization Process}
 \subsection{git download}
