@@ -447,10 +447,57 @@ Note: Atlassian has a good Git tutorial and reference guide.
 %%%%% WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
 
 \section{Initialization Process}
-\subsection{git download}
+To start working there are a series of steps and proceedure that must
+be followed. The first step is to obtain an account to the supercomputer--likely
+marylou. After setting up and account and logging on, you will need to
+make several directories and download aBuild.  
+\subsection{aBuild Download}
+1. Become familiar with git --see git tutorial
 \subsection{Make directories}
+You will need to build the following directories:\\
+\indent 1. .\verb|\|codes\verb|\|aBuild\\
+\indent 2. \verb|\|bin\\
+\indent 3. \verb|\|environments\\
+\indent 2. \verb|\|Species-system (i.e. AuCu)
+
 \subsubsection{bin directory}
 \section{Training Process}                      
+Once you have set up your system you are ready to start training the
+model to your specific system. The python module aBuild is designed to
+automate the train of the model process. This section will guild you
+through the different commands needed to train the model.\\
+
+The commands start with python ``builder.py **YMAL**" and then the
+various tags are used to step through the training process. The python
+command is only used for the tags denoted by the `-'.
+
+
+
+\begin{table}
+        \begin{center}
+                \caption{aBuild steps}
+                \label{bashcommands}
+                \begin{tabular}{l|r}
+                  \textbf{Step} & \textbf{Description}\\
+                  \hline
+                  -enum & Looks for possible crystal structures to
+                          enumerate through\\
+                  -write -rgk & Build the training set folder and run
+                                the getKPoints script\\
+                  -setup\_train & Pull data from VASP folders, Build
+                                 train.cfg and pot.mtp\\
+                  qsub* jobscript\_setup.sh & mlp train: needs
+                                             train.cfg, pot.mtp;
+                                              generates:
+                                              Potential.mtp\\
+                  -setup\_relax & Builds candidate.cfg
+
+                                                      
+                 \end{tabular}
+        \end{center}
+\end{table}
+
+
 
 \section{aBuild tags} %I don't know if this needs to be it's own
 % section. Just wanted to make a table of
@@ -532,4 +579,6 @@ Note: Atlassian has a good Git tutorial and reference guide.
   \end{longtable}
 \end{center}
 
+*For Marylou use sbatch instead of qsub
+**YMAL** is the yml file without the .yml extension.
 \end{document}
