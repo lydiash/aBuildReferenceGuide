@@ -21,27 +21,29 @@ to download one first. The Ubuntu app works great. See Table
 \ref{bashcommands} for a list of helpful commands. 
 
 \begin{center}
-  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||} %longtable so it wraps pages
     \caption{Bash commands and what they mean}
     \label{bashcommands}
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    %make the main header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endfirsthead
+    %make the next page header
     \hline
     \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endhead
+    %make the previous page footer
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\
-    \hline
+        page}} \\ \hline
     \endfoot
+    %make the last footer
     \hline
     \endlastfoot
+    %contents of the table
     \verb|ls| & list contents of current directory
     \\ \hline
     \verb|ls -a| & show hidden files too \\ \hline
@@ -73,7 +75,7 @@ to download one first. The Ubuntu app works great. See Table
     or renames a file \\ \hline
     \verb|man command| & show the manual for a
     command \\ \hline
-    \verb|cat file/one file/two| \textgreater \verb|new/file|
+    \verb|cat file/one file/two| \textgreater \verb| new_file|
     & concatonate two or more
     files into a new file \\ \hline
     \verb|history| & shows a history of your
@@ -95,20 +97,20 @@ to download one first. The Ubuntu app works great. See Table
     keyword
     to the
     screen \\ \hline
-    \verb|history|\textbar\verb|grep keyword| & search your history
+    \verb|history |\textbar\verb| grep keyword| & search your history
     for a keyword \\ \hline
-    \verb|grep keyword file/to/see|\textbar\verb|wc -l| & count
-    the occurences of lines with a keyword \\ \hline
-    \verb|command|\textbar \verb|less| & pipe the output of a command
+    \verb|grep keyword file/to/search|& count
+    the occurences of lines with a \\
+    \textbar \verb| wc -l| & keyword\\ \hline
+    \verb|command |\textbar \verb| less| & pipe the output of a command
     to less \\ \hline
-    \verb|command|\textgreater\textgreater\verb|file|
+    \verb|command |\textgreater\textgreater\verb| file|
     & append the output of a
     command to a file \\ \hline
-    \verb|command|\textgreater \verb|file| & writes the output of the
+    \verb|command |\textgreater \verb| file| & writes the output of the
     command to a file \\ \hline
     \verb|!command| & executes the most recent command
-    that \\ \hline
-    & starts with the letters you typed \\ \hline
+    that starts with the letters you typed \\ \hline
     \verb|echo something| & print something to the screen \\\hline
   \end{longtable}
 \end{center}
@@ -118,103 +120,109 @@ to download one first. The Ubuntu app works great. See Table
 Emacs is a text editor that has a bunch of cool shortcuts you can
 learn to make editing documents super easy. On a Mac you can download
 Aquamacs, which uses the same commands as Emacs but you can click with
-your mouse. \ref{emacsChart} Has a chart of basic Emacs
-commands. \ref{AquamacsChart} has a list of Aquamacs specific things. 
+your mouse. \ref{emacs} Has a chart of basic Emacs
+commands. \ref{aquamacs} has a list of Aquamacs specific things. 
 
 \begin{center}
-  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}%longtable so it wraps pages
     \caption{Emacs commands and what they mean}
     \label{emacs}
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endfirsthead
+    %next page header
     \hline
     \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endhead
+    %footer
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\
-    \hline
+        page}} \\ \hline
     \endfoot
+    %last footer
     \hline
     \endlastfoot
-      \verb|emacs path/to/file| & enter emacs editor for
-                                  existing file \\
-                       & or creates new file with that name \\
-      ctrl+x ctrl+c y & save and quit a file \\
-      ctrl+x ctrl+c n & quit without saving \\
-      ctrl+w & cut a line \\
-      ctrl+y & paste a line \\
-      ctrl+k & kills the contents of a line \\
-      ctrl+k ctrl+k & kills a whole line \\
-      ctrl+shift+- & undo \\
-      ctrl+u \verb|3 command| & executes the command 3 times \\
+    %contents of table
+    \verb|emacs path/to/file| & enter emacs editor for
+    existing file or creates new file with that name \\ \hline
+    ctrl+x ctrl+c y & save and quit a file \\ \hline
+    ctrl+x ctrl+c n & quit without saving \\ \hline
+    ctrl+w & cut a line \\ \hline
+    ctrl+y & paste a line \\ \hline
+    ctrl+k & kills the contents of a line \\ \hline
+    ctrl+k ctrl+k & kills a whole line \\ \hline
+    ctrl+shift+- & undo \\ \hline
+    ctrl+u \verb|3 command| & executes the command 3 times \\ \hline
   \end{longtable}
 \end{center}
 
 \begin{center}
-  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
     \caption{Extra things in Aquamacs}
     \label{aquamacs}
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endfirsthead
+    %next page header
     \hline
     \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endhead
+    %footer
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\
-    \hline
+        page}} \\ \hline
     \endfoot
+    %last footer
     \hline
     \endlastfoot
-      ctrl+x ctrl+f & find and open a file (at the \\
-                       & bottom of the screen) \\
+    %contents of table
+    ctrl+x ctrl+f & find and open a file (at the bottom of the screen)
+    \\ \hline
   \end{longtable}
 \end{center}
 
 \section{Bash Loops}
 
-Here's a table \ref{bashloops} of basic bash loops and logic, and a
+Here's a table \ref{loops} of basic bash loops and logic, and a
 basic example \ref{loopexample} that relates to what we do.
 
 \begin{center}
-  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
     \caption{Loops in bash}
     \label{loops}
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endfirsthead
+    %next page header
     \hline
     \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endhead
+    % footer
+    \\ \hline
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\
-    \hline
+        page}} \\ \hline
     \endfoot
+    %last footer
     \hline
     \endlastfoot
-      \verb|for i in {1..100}| & for 100 iterations\\
-      \verb|do|
-      \verb|command $i| & do this thing \verb|$i| \\
-      \verb|done| & references the index \\
+    %contents of table
+      \verb|for i in {1..100}| & for 100 iterations \\
+      \verb|do|& \\
+      \verb|command $i| & do this thing(\verb|$i| \\
+      \verb|done| & references the index)\\
       \hline
       \verb|if [ condition ]| & check the condition \\
       \verb|then| & if it's true \\
@@ -228,38 +236,39 @@ basic example \ref{loopexample} that relates to what we do.
 \end{center}
 
 \begin{center}
-  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
     \caption{Example of a Bash loop}
     \label{loopexample}
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endfirsthead
+    %next page header
     \hline
     \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endhead
+    %footer
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\
-    \hline
+        page}} \\ \hline
     \endfoot
+    %last page footer
     \hline
     \endlastfoot
-      \verb|for i in {1..100}| & for 100 times \\
-      \verb|do|
-      \verb|cd E.$i| & enter the directory named
-                       \verb|E.#|\\
-      \verb|if [ -e KPOINTS ]| & if KPOINTS doesn't exist
-      \\
-      \verb|echo $i| & print the directory number \\
-      \verb|getKPoints| & run the getKPoints script \\
-      \verb|fi|
-      \verb|cd ..| & go back one directory \\
-      \verb|done|
+    \verb|for i in {1..100}| & for 100 times \\
+    \verb|do| & \\
+    \verb|cd E.$i| & enter the directory named
+    \verb|E.#|\\
+    \verb|if [ -e KPOINTS ]| & if KPOINTS doesn't exist
+    \\
+    \verb|echo $i| & print the directory number \\
+    \verb|getKPoints| & run the getKPoints script \\
+    \verb|fi|
+    \verb|cd ..| & go back one directory \\
+    \verb|done|
   \end{longtable}
 \end{center}
 
@@ -270,43 +279,45 @@ basic example \ref{loopexample} that relates to what we do.
 How to make and use a virtual environment to run python interactively, table \ref{venv}.
 
 \begin{center}
-  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+  \begin{longtable}{||p{6.5cm}|p{4.5cm}||}
     \caption{Build a virtual environment}
     \label{venv}
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endfirsthead
+    %next page header
     \hline
     \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endhead
+    %footer
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\
-    \hline
+        page}} \\ \hline
     \endfoot
+    %last footer
     \hline
     \endlastfoot
-      \verb|mkdir environments| & make a directory to \\
-                       & hold your environments \\
-      \verb|cd environments| & go to that directory \\
-      \verb|python -m venv name_of_env| & make the
-                                          environment \\
-      \verb|emacs .bash_profile| & edit your
-                                   \verb|.bash_profile|\\
-      \verb|function work on {| & add these lines to it \\
-      \verb| source ~/environments/$1/bin/activate| & \\
-      \verb|}|
-      ctrl+x ctrl+c y & save and quit the editor \\
-      \verb|source .bash_profile| & update your
-                                    \verb|.bash_profile|\\
-      \verb|workon name_of_env| & enters your environment
-      \\
-      ctrl+d & exits your environment \\
+    %contents of table
+    \verb|mkdir environments| & make a directory to hold your
+    environments \\ \hline
+    \verb|cd environments| & go to that directory \\ \hline
+    \verb|python -m venv name_of_env| & make the
+    environment \\ \hline
+    \verb|emacs .bash_profile| & edit your
+    \verb|.bash_profile|\\ \hline
+    \verb|function workon {| & add these lines to it \\
+      \verb|source ~/environments/$1/bin/activate| & \\
+      \verb|}| & \\ \hline
+    ctrl+x ctrl+c y & save and quit the editor \\ \hline
+    \verb|source .bash_profile| & update your
+    \verb|.bash_profile|\\ \hline
+    \verb|workon name_of_env| & enters your environment
+    \\ \hline
+    ctrl+d & exits your environment \\ \hline
   \end{longtable}
 \end{center}
 
@@ -392,45 +403,40 @@ comprehensive list.
   \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
     \caption{Basic Github commands}
     \label{git}
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endfirsthead
+    %next page header
     \hline
     \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-    \hline
-    \textbf{Command} & \textbf{What it does}\\
-    \hline \hline
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endhead
+    %footer
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\
-    \hline
+        page}} \\ \hline
     \endfoot
+    %last page footer
     \hline
     \endlastfoot
-      \verb|git checkout file/to/update| & make a copy of upstream's \\
-                       & version of the file on your machine \\
-      \verb|git pull upstream master| & update your master copy
-                                        with \\
-                       & upstream's version \\
-      \verb|git status| & tells you the status of each file on \\
-                       & your machine with Github's copy \\
-      \verb|git add file/to/add| & add your version of the file \\
-                       & to the commit \\
-      \verb|git commit| & commit the changes
-                          you added. \\
-                       & Will open an editor for you to \\
-                       & leave a comment\\
-      \verb|git commit -m "comment"|& commit the changes
-                                      you added \\
-                       & and leave a comment \\
-      \verb|git push| & pushes your latest commit \\
-                       & to your fork on Git \\
-      \verb|git push master upstream| & push your
-                                        request \\
-                       & to add your changes to upstream \\
+    \verb|git checkout file/to/update| & make a copy of upstream's
+    version of the file on your machine \\ \hline
+    \verb|git pull upstream master| & update your master copy
+    with upstream's version \\ \hline
+    \verb|git status| & tells you the status of each file on your
+    machine with Github's copy \\ \hline
+    \verb|git add file/to/add| & add your version of the file to the
+    commit \\ \hline
+    \verb|git commit| & commit the changes
+    you added. Will open an editor for you to leave a comment\\ \hline
+    \verb|git commit -m "comment"|& commit the changes
+    you added and leave a comment \\ \hline
+    \verb|git push| & pushes your latest commit to your fork on Git \\ \hline
+    \verb|git push master upstream| & push your
+    request to add your changes to upstream \\ \hline
   \end{longtable}
 \end{center}
 
@@ -454,40 +460,75 @@ Note: Atlassian has a good Git tutorial and reference guide.
 %%%%% The following two tables might be better suited to be
 %%%%% combined. It would create the dependencies for the workflow so
 %%%%% you'd know what order to execute all the commands in.
-\begin{table}
-  \begin{center}
-    \caption{aBuild tag Dependencies}
+
+\begin{center}
+  \begin{longtable}{||p{3cm}|p{4cm}|p{4cm}||}
+    \caption{aBuild tag dependencies}
     \label{aBuilddepend}
-    \begin{tabular}{r|c|l}
-      \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\
-      \hline
-      \verb|-write| & \verb|.yml| file & VASP input files \\
-      \verb|-setup_train| & VASP output files & \verb|train.cfg| \\
-                    & \verb|Potential.mtp| & \verb|pot.mtp| \\
-      \verb|-setup_relax| & %I think something goes here but not
-      % sure
-                                      &\verb|to_relax.cfg| \\
-                    & & \verb|relax.ini| \\
-      \verb|-setep_select_add| & %???
-                                      & \verb|candidate.cfg| \\
-      \verb|-add| & \verb|new_training.cfg| & VASP input files \\
+    %first header
+    \\ \hline
+    \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{3}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{3}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last page footer
+    \hline
+    \endlastfoot
+    %contents of table
+    \verb|-write| & \verb|.yml| file & VASP input files \\ \hline
+    \verb|-setup_train| & VASP output files & \verb|train.cfg| \\ 
+    & \verb|Potential.mtp| & \verb|pot.mtp| \\ \hline
+    \verb|-setup_relax| & %I think something goes here but not
+    % sure
+    &\verb|to_relax.cfg| \\
+    & & \verb|relax.ini| \\ \hline
+    \verb|-setep_select_add| & %???
+    & \verb|candidate.cfg| \\ \hline
+    \verb|-add| & \verb|new_training.cfg| & VASP input files \\ \hline
   \end{longtable}
 \end{center}
 
-\begin{table}
-  \begin{center}
-    \caption{mlp Command Dependencies}
+\begin{center}
+  \begin{longtable}{||p{3cm}|p{4cm}|p{4cm}||}
+    \caption{mlp command dependencies}
     \label{mlpdepend}
-    \begin{tabular}{r|c|l}
-      \textbf{Command:} & \textbf{Needs:} & \textbf{Generates:}\\
-      \hline
-      \verb|train| & \verb|train.cfg| & \verb|Potential.mtp| \\
-                        & \verb|pot.mtp| & \\
-      \verb|relax| & \verb|to_relax.cfg| & \verb|relaxed.cfg| \\
-                        &\verb|relax.ini| & \verb|unrelaxed.cfg| \\
-                        & \verb|pot.mtp| & \verb|candidates.cfg| \\
-      \verb|select-add| & \verb|train.cfg| & \verb|new_training.cfg| \\
-                        & \verb|candidate.cfg| & \\
+    % first header
+    \\ \hline
+    \textbf{Command} & \textbf{Needs} & \textbf{Generates}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{3}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{Needs} & \textbf{Generates}\\ \hline \hline
+    \endhead
+    %footer 
+    \multicolumn{3}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last page footer
+    \hline
+    \endlastfoot
+    %contents of table
+    \verb|train| & \verb|train.cfg| & \verb|Potential.mtp| \\
+    & \verb|pot.mtp| & \\ \hline
+    \verb|relax| & \verb|to_relax.cfg| & \verb|relaxed.cfg| \\
+    &\verb|relax.ini| & \verb|unrelaxed.cfg| \\
+    & \verb|pot.mtp| & \verb|candidates.cfg| \\ \hline
+    \verb|select-add| & \verb|train.cfg| & \verb|new_training.cfg| \\
+    & \verb|candidate.cfg| & \\ \hline
   \end{longtable}
 \end{center}
 

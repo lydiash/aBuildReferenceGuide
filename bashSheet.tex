@@ -1,1 +1,248 @@
-this will be a bash cheat sheet
+%%Strictly a bash cheat sheet.
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{relsize}
+\usepackage{float}
+\usepackage{longtable}
+
+\begin{document}
+
+
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||} %longtable so it wraps pages
+    \caption{Bash commands and what they mean}
+    %make the main header
+    \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %make the next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %make the previous page footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %make the last footer
+    \hline
+    \endlastfoot
+    %contents of the table
+    \verb|ls| & list contents of current directory
+    \\ \hline
+    \verb|ls -a| & show hidden files too \\ \hline
+    \verb|ls -altr| & see the last changes made to
+    the files in a directory \\ \hline
+    \verb|mkdir directory| & make a new directory
+    \\ \hline
+    \verb|cd directory| & change directory \\ \hline
+    \verb|cd .. |& go back a directory \\ \hline
+    \verb|cd ../..| & go back two directories \\ \hline
+    \verb|cd ~ |& go to your root \\ \hline
+    \verb|pwd| & print working directory \\ \hline
+    \verb|~/| & means your root \\ \hline
+    \verb|.| & means the current directory \\ \hline
+    \verb|cp file/to/copy where/newName| & copy
+    a file \\ \hline
+    \verb|cp file/to/copy .| & copy a file to current
+    directory without changing the name \\ \hline
+    \verb|cp directory/* . |& copy all the files in a
+    directory \\ \hline
+    & to the current directory \\ \hline
+    \verb|cp -r directory new/directory| & copy a
+    directory recursively \\ \hline
+    \verb|rm file/to/remove| & remove a file \\ \hline
+    \verb|rmdir directory| & remove a directory \\ \hline
+    \verb|rm -rf directory| & blow away a directory
+    permanently \\ \hline
+    \verb|mv file/to/move where/newName| & moves
+    or renames a file \\ \hline
+    \verb|man command| & show the manual for a
+    command \\ \hline
+    \verb|cat file/one file/two| \textgreater \verb| new_file|
+    & concatonate two or more
+    files into a new file \\ \hline
+    \verb|history| & shows a history of your
+    commands \\ \hline
+    \verb|less file/to/see| & shows one page of a
+    file \\ \hline
+    & space turns the page q quits \\ \hline
+    \verb|head file/to/see| & see the first page
+    of a file \\ \hline
+    \verb|head -n 8 file/to/see| & see the first 8 lines
+    of a file \\ \hline
+    \verb|tail file/to/see| & see the last page of a file
+    \\ \hline
+    \verb|tail -n 10 file/to/see| & see the last 10 lines
+    of a file \\ \hline
+    \verb|grep keyword file/to/search| & search a file
+    for a keyword and print all the lines with
+    that
+    keyword
+    to the
+    screen \\ \hline
+    \verb|history |\textbar\verb| grep keyword| & search your history
+    for a keyword \\ \hline
+    \verb|grep keyword file/to/search|& count
+    the occurences of lines with a \\
+    \textbar \verb| wc -l| & keyword\\ \hline
+    \verb|command |\textbar \verb| less| & pipe the output of a command
+    to less \\ \hline
+    \verb|command |\textgreater\textgreater\verb| file|
+    & append the output of a
+    command to a file \\ \hline
+    \verb|command |\textgreater \verb| file| & writes the output of the
+    command to a file \\ \hline
+    \verb|!command| & executes the most recent command
+    that starts with the letters you typed \\ \hline
+    \verb|echo something| & print something to the screen \\\hline
+  \end{longtable}
+\end{center} 
+
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}%longtable so it wraps pages
+    \caption{Emacs commands and what they mean}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last footer
+    \hline
+    \endlastfoot
+    %contents of table
+    \verb|emacs path/to/file| & enter emacs editor for
+    existing file or creates new file with that name \\ \hline
+    ctrl+x ctrl+c y & save and quit a file \\ \hline
+    ctrl+x ctrl+c n & quit without saving \\ \hline
+    ctrl+w & cut a line \\ \hline
+    ctrl+y & paste a line \\ \hline
+    ctrl+k & kills the contents of a line \\ \hline
+    ctrl+k ctrl+k & kills a whole line \\ \hline
+    ctrl+shift+- & undo \\ \hline
+    ctrl+u \verb|3 command| & executes the command 3 times \\ \hline
+  \end{longtable}
+\end{center}
+
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
+    \caption{Extra things in Aquamacs}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last footer
+    \hline
+    \endlastfoot
+    %contents of table
+    ctrl+x ctrl+f & find and open a file (at the bottom of the screen)
+    \\ \hline
+  \end{longtable}
+\end{center}
+
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
+    \caption{Loops in bash}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    % footer
+    \\ \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last footer
+    \hline
+    \endlastfoot
+    %contents of table
+      \verb|for i in {1..100}| & for 100 iterations \\
+      \verb|do|& \\
+      \verb|command $i| & do this thing(\verb|$i| \\
+      \verb|done| & references the index)\\
+      \hline
+      \verb|if [ condition ]| & check the condition \\
+      \verb|then| & if it's true \\
+      \verb|command| & do this \\
+      \verb|else| & if it's not \\
+      \verb|command| & do this \\
+      \verb|fi| & \\
+      \hline
+      \verb|if [ -e file ] |& check if a file exists \\
+  \end{longtable}
+\end{center}
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
+    \caption{Example of a Bash loop}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last page footer
+    \hline
+    \endlastfoot
+    \verb|for i in {1..100}| & for 100 times \\
+    \verb|do| & \\
+    \verb|cd E.$i| & enter the directory named
+    \verb|E.#|\\
+    \verb|if [ -e KPOINTS ]| & if KPOINTS doesn't exist
+    \\
+    \verb|echo $i| & print the directory number \\
+    \verb|getKPoints| & run the getKPoints script \\
+    \verb|fi|
+    \verb|cd ..| & go back one directory \\
+    \verb|done|
+  \end{longtable}
+\end{center}
+
+\end{document}
