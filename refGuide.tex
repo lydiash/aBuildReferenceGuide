@@ -2,6 +2,8 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{relsize}
+\usepackage{float}
+\usepackage{longtable}
 
 \title{So You Want to do Materials Research:\\[0.02em]\smaller{}a
 guide to aBuild and the skills you need to use it}
@@ -15,78 +17,101 @@ guide to aBuild and the skills you need to use it}
 
 First things first, you need to learn to navigate your command
 line. Macs have a built in command line (terminal), but on Windows you will need
-to download one first. The Ubuntu app works great. See
+to download one first. The Ubuntu app works great. See Table
 \ref{bashcommands} for a list of helpful commands. 
 
-\begin{table}
-        \begin{center}
-                \caption{Bash commands and what they mean}
-                \label{bashcommands}
-                \begin{tabular}{l|r}
-                        \textbf{Command} & \textbf{What it does}\\
-                        \hline
-                        ls & list contents of current directory \\
-                        ls -a & show hidden files too \\
-                        ls -altr & see the last changes made to the \\
-                         & files in a directory \\
-                        mkdir directory & make a new directory \\
-                        cd directory & change directory \\
-                        cd .. & go back a directory \\
-                        cd ../.. & go back two directories \\
-                        cd ~ & go to your root \\
-                        pwd & print working directory \\
-                        ~/ & means your root \\
-                        . & means the current directory \\
-                        cp file/to/copy where/it/goes/newName & copy
-                        a file \\
-                        cp file/to/copy . & copy a file to current
-                        directory without \\
-                         & changing the name \\
-                        cp files/* . & copy all the files in a
-                        directory \\
-                         & to the current directory \\
-                        cp -r directory new/directory & copy a
-                        directory recursively \\
-                        rm file/to/remove & remove a file \\
-                        rmdir directory & remove a directory \\
-                        rm -rf directory & blow away a directory
-                        permanently \\
-                        mv file/to/move where/it/goes/newName & moves
-                        or renames a file \\
-                        man command & show the manual for a command \\
-                        cat file/one file/two \textgreater new/file & concatonate
-                        two or more files into a new file \\
-                        history & shows a history of your commands \\
-                        less file/to/see & shows one page of a file \\
-                         & space turns the page q quits \\
-                        head file/to/see & see the first page of a file \\
-                        head -n 8 file/to/see & see the first 8 lines
-                        of a file \\
-                        tail file/to/see & see the last page of a file
-                        \\
-                        tail -n 10 file/to/see & see the last 10 lines
-                        of a file \\
-                        grep keyword file/to/search & search a file
-                        for a keyword and \\
-                         & print all the lines with that keyword to the screen \\
-                        history | grep keyword & search your history
-                        for a keyword \\
-                        grep keyword file/to/search \textbar wc -l & count
-                        the occurences of lines with a keyword \\
-                        command \textbar less & pipe the output of a command
-                        to less \\
-                        command \textgreater \textgreater file & append the output of a
-                        command to a file \\
-                        command \textgreater file & writes the output of the
-                        command to a file \\
-                        !command & executes the most recent command
-                        that \\
-                         & starts with the letters you typed \\
-                        echo & print something to the screen \\
-                  
-                 \end{tabular}
-        \end{center}
-\end{table}
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+    \caption{Bash commands and what they mean}
+    \label{bashcommands}
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endfirsthead
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endhead
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    \verb|ls| & list contents of current directory
+    \\ \hline
+    \verb|ls -a| & show hidden files too \\ \hline
+    \verb|ls -altr| & see the last changes made to
+    the files in a directory \\ \hline
+    \verb|mkdir directory| & make a new directory
+    \\ \hline
+    \verb|cd directory| & change directory \\ \hline
+    \verb|cd .. |& go back a directory \\ \hline
+    \verb|cd ../..| & go back two directories \\ \hline
+    \verb|cd ~ |& go to your root \\ \hline
+    \verb|pwd| & print working directory \\ \hline
+    \verb|~/| & means your root \\ \hline
+    \verb|.| & means the current directory \\ \hline
+    \verb|cp file/to/copy where/newName| & copy
+    a file \\ \hline
+    \verb|cp file/to/copy .| & copy a file to current
+    directory without changing the name \\ \hline
+    \verb|cp directory/* . |& copy all the files in a
+    directory \\ \hline
+    & to the current directory \\ \hline
+    \verb|cp -r directory new/directory| & copy a
+    directory recursively \\ \hline
+    \verb|rm file/to/remove| & remove a file \\ \hline
+    \verb|rmdir directory| & remove a directory \\ \hline
+    \verb|rm -rf directory| & blow away a directory
+    permanently \\ \hline
+    \verb|mv file/to/move where/newName| & moves
+    or renames a file \\ \hline
+    \verb|man command| & show the manual for a
+    command \\ \hline
+    \verb|cat file/one file/two| \textgreater \verb|new/file|
+    & concatonate two or more
+    files into a new file \\ \hline
+    \verb|history| & shows a history of your
+    commands \\ \hline
+    \verb|less file/to/see| & shows one page of a
+    file \\ \hline
+    & space turns the page q quits \\ \hline
+    \verb|head file/to/see| & see the first page
+    of a file \\ \hline
+    \verb|head -n 8 file/to/see| & see the first 8 lines
+    of a file \\ \hline
+    \verb|tail file/to/see| & see the last page of a file
+    \\ \hline
+    \verb|tail -n 10 file/to/see| & see the last 10 lines
+    of a file \\ \hline
+    \verb|grep keyword file/to/search| & search a file
+    for a keyword and print all the lines with
+    that
+    keyword
+    to the
+    screen \\ \hline
+    \verb|history|\textbar\verb|grep keyword| & search your history
+    for a keyword \\ \hline
+    \verb|grep keyword file/to/see|\textbar\verb|wc -l| & count
+    the occurences of lines with a keyword \\ \hline
+    \verb|command|\textbar \verb|less| & pipe the output of a command
+    to less \\ \hline
+    \verb|command|\textgreater\textgreater\verb|file|
+    & append the output of a
+    command to a file \\ \hline
+    \verb|command|\textgreater \verb|file| & writes the output of the
+    command to a file \\ \hline
+    \verb|!command| & executes the most recent command
+    that \\ \hline
+    & starts with the letters you typed \\ \hline
+    \verb|echo something| & print something to the screen \\\hline
+  \end{longtable}
+\end{center}
 
 \section{Emacs}
 
@@ -96,91 +121,147 @@ Aquamacs, which uses the same commands as Emacs but you can click with
 your mouse. \ref{emacsChart} Has a chart of basic Emacs
 commands. \ref{AquamacsChart} has a list of Aquamacs specific things. 
 
-\begin{table}
-        \begin{center}
-                \caption{Emacs commands and what they mean}
-                \label{emacsChart}
-                \begin{tabular}{l|r}
-                  \textbf{Command} & \textbf{What it does}\\
-                  \hline
-                  emacs path/to/file & enter emacs editor for
-                                             existing file \\
-                   & or creates new file with that name \\
-                  ctrl+x ctrl+c y & save and quit a file \\
-                  ctrl+x ctrl+c n & quit without saving \\
-                  ctrl+w & cut a line \\
-                  ctrl+y & paste a line \\
-                  ctrl+k & kills the contents of a line \\
-                  ctrl+k ctrl+k & kills a whole line \\
-                  ctrl+shift+- & undo \\
-                  ctrl+u 3 command & executes the command 3 times \\
-                 \end{tabular}
-        \end{center}
-\end{table}
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+    \caption{Emacs commands and what they mean}
+    \label{emacs}
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endfirsthead
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endhead
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+      \verb|emacs path/to/file| & enter emacs editor for
+                                  existing file \\
+                       & or creates new file with that name \\
+      ctrl+x ctrl+c y & save and quit a file \\
+      ctrl+x ctrl+c n & quit without saving \\
+      ctrl+w & cut a line \\
+      ctrl+y & paste a line \\
+      ctrl+k & kills the contents of a line \\
+      ctrl+k ctrl+k & kills a whole line \\
+      ctrl+shift+- & undo \\
+      ctrl+u \verb|3 command| & executes the command 3 times \\
+  \end{longtable}
+\end{center}
 
-\begin{table}
-        \begin{center}
-                \caption{Extra things in Aquamacs}
-                \label{AquamacsChart}
-                \begin{tabular}{l|r}
-                  \textbf{Command} & \textbf{What it does}\\
-                  \hline
-                  ctrl+x ctrl+f & find and open a file (at the \\
-                   & bottom of the screen) \\
-                 \end{tabular}
-        \end{center}
-\end{table}
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+    \caption{Extra things in Aquamacs}
+    \label{aquamacs}
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endfirsthead
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endhead
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+      ctrl+x ctrl+f & find and open a file (at the \\
+                       & bottom of the screen) \\
+  \end{longtable}
+\end{center}
 
 \section{Bash Loops}
 
 Here's a table \ref{bashloops} of basic bash loops and logic, and a
 basic example \ref{loopexample} that relates to what we do.
 
-\begin{table}
-        \begin{center}
-                \caption{Loops in Bash}
-                \label{bashloops}
-                \begin{tabular}{l|r}
-                  \textbf{Command} & \textbf{What it does}\\
-                  \hline
-                  \verb|for i in {1..100}| & for 100 iterations\\
-                  \verb|do|
-                  \verb|command $i| & do this thing \verb|$i| \\
-                  \verb|done| & references the index \\
-                  \hline
-                  \verb|if [ condition ]| & check the condition \\
-                  \verb|then| & if it's true \\
-                  \verb|command| & do this \\
-                  \verb|else| & if it's not \\
-                  \verb|command| & do this \\
-                  \verb|fi| & \\
-                  \hline
-                  \verb|if [ -e file ] |& check if a file exists \\
-                 \end{tabular}
-        \end{center}
-      \end{table}
-      
-\begin{table}
-        \begin{center}
-                \caption{Example}
-                \label{loopexample}
-                \begin{tabular}{l|r}
-                  \textbf{Command} & \textbf{What it does}\\
-                  \hline
-                  \verb|for i in {1..100}| & for 100 times \\
-                  \verb|do|
-                  \verb|cd E.$i| & enter the directory named
-                                   \verb|E.#|\\
-                  \verb|if [ -e KPOINTS ]| & if KPOINTS doesn't exist
-                  \\
-                  \verb|echo $i| & print the directory number \\
-                  \verb|getKPoints| & run the getKPoints script \\
-                  \verb|fi|
-                  \verb|cd ..| & go back one directory \\
-                  \verb|done|
-                 \end{tabular}
-        \end{center}
-\end{table}
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+    \caption{Loops in bash}
+    \label{loops}
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endfirsthead
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endhead
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+      \verb|for i in {1..100}| & for 100 iterations\\
+      \verb|do|
+      \verb|command $i| & do this thing \verb|$i| \\
+      \verb|done| & references the index \\
+      \hline
+      \verb|if [ condition ]| & check the condition \\
+      \verb|then| & if it's true \\
+      \verb|command| & do this \\
+      \verb|else| & if it's not \\
+      \verb|command| & do this \\
+      \verb|fi| & \\
+      \hline
+      \verb|if [ -e file ] |& check if a file exists \\
+  \end{longtable}
+\end{center}
+
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+    \caption{Example of a Bash loop}
+    \label{loopexample}
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endfirsthead
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endhead
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+      \verb|for i in {1..100}| & for 100 times \\
+      \verb|do|
+      \verb|cd E.$i| & enter the directory named
+                       \verb|E.#|\\
+      \verb|if [ -e KPOINTS ]| & if KPOINTS doesn't exist
+      \\
+      \verb|echo $i| & print the directory number \\
+      \verb|getKPoints| & run the getKPoints script \\
+      \verb|fi|
+      \verb|cd ..| & go back one directory \\
+      \verb|done|
+  \end{longtable}
+\end{center}
 
 
 %%%% DON'T KNOW WHERE THIS BELONGS IN THIS DOCUMENT BUT I'M GONNA TYPE
@@ -188,32 +269,46 @@ basic example \ref{loopexample} that relates to what we do.
 
 How to make and use a virtual environment to run python interactively, table \ref{venv}.
 
-\begin{table}
-        \begin{center}
-                \caption{Build a virtual environment}
-                \label{venv}
-                \begin{tabular}{l|r}
-                  \textbf{Command} & \textbf{What it does}\\
-                  \hline
-                  \verb|mkdir environments| & make a directory to \\
-                                   & hold your environments \\
-                  \verb|cd environments| & go to that directory \\
-                  \verb|python -m venv name_of_env| & make the
-                                                      environment \\
-                  \verb|emacs .bash_profile| & edit your
-                                               \verb|.bash_profile|\\
-                  \verb|function work on {| & add these lines to it \\
-                  \verb| source ~/environments/$1/bin/activate| & \\
-                  \verb|}|
-                  ctrl+x ctrl+c y & save and quit the editor \\
-                  source \verb|.bash_profile| & update your
-                                                \verb|.bash_profile|\\
-                  \verb|workon name_of_env| & enters your environment
-                  \\
-                  ctrl+d & exits your environment \\
-                \end{tabular}
-        \end{center}
-\end{table}
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+    \caption{Build a virtual environment}
+    \label{venv}
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endfirsthead
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endhead
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+      \verb|mkdir environments| & make a directory to \\
+                       & hold your environments \\
+      \verb|cd environments| & go to that directory \\
+      \verb|python -m venv name_of_env| & make the
+                                          environment \\
+      \verb|emacs .bash_profile| & edit your
+                                   \verb|.bash_profile|\\
+      \verb|function work on {| & add these lines to it \\
+      \verb| source ~/environments/$1/bin/activate| & \\
+      \verb|}|
+      ctrl+x ctrl+c y & save and quit the editor \\
+      \verb|source .bash_profile| & update your
+                                    \verb|.bash_profile|\\
+      \verb|workon name_of_env| & enters your environment
+      \\
+      ctrl+d & exits your environment \\
+  \end{longtable}
+\end{center}
 
 \section{Basics of Github}
 
@@ -269,13 +364,14 @@ git clone git@github.com:user/repository.git
 You can do this over and over again, it will just overwrite the code
 you copied to your machine. 
 
-2.a. If you expect to make your own changes to the code, start by making
+2.
+a. If you expect to make your own changes to the code, start by making
 a fork of the original code on Github. Then add a master copy of your
 fork to your machine using the following command:
 \begin{verbatim}
 git remote add master git@github.com:user/repository.git
 \end{verbatim}
-2.b. If you have your own code that you would like to edit and put on
+b. If you have your own code that you would like to edit and put on
 Github for others to see, you will have to make your own repository on
 Github, then use the same command as above.
 
@@ -292,44 +388,58 @@ the code on your machine, and on Github from your machine. Here's a
 list of some basic Git commands \ref{git}. Remember that this is not a
 comprehensive list.
 
-\begin{table}
-        \begin{center}
-                \caption{Basic Github Commands}
-                \label{git}
-                \begin{tabular}{l|r}
-                  \textbf{Command} & \textbf{What it does}\\
-                  \hline
-                  git checkout file/to/update & make a copy of upstream's \\
-                                   & version of the file on your machine \\
-                  git pull upstream master & update your master copy
-                                             with \\
-                                   & upstream's version \\
-                  git status & tells you the status of each file on \\
-                                   & your machine with Github's copy
-                  git add file/to/add & add your version of the file
-                                   & to the commit \\
-                  git commit & commit the changes
-                               you added. \\
-                                   & Will open an editor for you to \\
-                                   & leave a comment\\
-                  git commit -m \verb|"comment"|& commit the changes
-                                                  you added \\
-                                   & and leave a comment \\
-                  git push & pushes your latest commit \\
-                                   & to your fork on Git \\
-                  git push master upstream & push your
-                                             request \\
-                                   & to add your changes to upstream \\
-                \end{tabular}
-        \end{center}
-\end{table}
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+    \caption{Basic Github commands}
+    \label{git}
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endfirsthead
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+    \hline
+    \textbf{Command} & \textbf{What it does}\\
+    \hline \hline
+    \endhead
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+      \verb|git checkout file/to/update| & make a copy of upstream's \\
+                       & version of the file on your machine \\
+      \verb|git pull upstream master| & update your master copy
+                                        with \\
+                       & upstream's version \\
+      \verb|git status| & tells you the status of each file on \\
+                       & your machine with Github's copy \\
+      \verb|git add file/to/add| & add your version of the file \\
+                       & to the commit \\
+      \verb|git commit| & commit the changes
+                          you added. \\
+                       & Will open an editor for you to \\
+                       & leave a comment\\
+      \verb|git commit -m "comment"|& commit the changes
+                                      you added \\
+                       & and leave a comment \\
+      \verb|git push| & pushes your latest commit \\
+                       & to your fork on Git \\
+      \verb|git push master upstream| & push your
+                                        request \\
+                       & to add your changes to upstream \\
+  \end{longtable}
+\end{center}
 
 Note: Atlassian has a good Git tutorial and reference guide. 
 
 \subsection{SSH key generation}
-%%%%%WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
-%%%%%WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
-                        
+%%%%% WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
+%%%%% WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
+
 \section{Initialization Process}
 \subsection{git download}
 \subsection{Make directories}
@@ -337,50 +447,48 @@ Note: Atlassian has a good Git tutorial and reference guide.
 \section{Training Process}                      
 
 \section{aBuild tags} %I don't know if this needs to be it's own
-                      %section. Just wanted to make a table of
-                      %dependencies and didn't know where it should
-                      %go.
+% section. Just wanted to make a table of
+% dependencies and didn't know where it should
+% go.
 
-%%%%%The following two tables might be better suited to be
-%%%%%combined. It would create the dependencies for the workflow so
-%%%%%you'd know what order to execute all the commands in.
+%%%%% The following two tables might be better suited to be
+%%%%% combined. It would create the dependencies for the workflow so
+%%%%% you'd know what order to execute all the commands in.
 \begin{table}
-        \begin{center}
-                \caption{aBuild tag Dependencies}
-                \label{aBuilddepend}
-                \begin{tabular}{l|c|r}
-                  \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\
-                  \hline
-                  -write & .yml file & VASP input files \\
-                  -setup_train & VASP output files & train.cfg \\
-                   & Potential.mtp & pot.mtp \\
-                  -setup_relax & %I think something goes here but not
-                  % sure
-                                                  & to_relax.cfg \\
-                                & & relax.ini \\
-                  -setep_select_add & %???
-                                                  & candidate.cfg \\
-                  -add & new_training.cfg & VASP input files \\
-                \end{tabular}
-        \end{center}
-\end{table}
+  \begin{center}
+    \caption{aBuild tag Dependencies}
+    \label{aBuilddepend}
+    \begin{tabular}{r|c|l}
+      \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\
+      \hline
+      \verb|-write| & \verb|.yml| file & VASP input files \\
+      \verb|-setup_train| & VASP output files & \verb|train.cfg| \\
+                    & \verb|Potential.mtp| & \verb|pot.mtp| \\
+      \verb|-setup_relax| & %I think something goes here but not
+      % sure
+                                      &\verb|to_relax.cfg| \\
+                    & & \verb|relax.ini| \\
+      \verb|-setep_select_add| & %???
+                                      & \verb|candidate.cfg| \\
+      \verb|-add| & \verb|new_training.cfg| & VASP input files \\
+  \end{longtable}
+\end{center}
 
 \begin{table}
-        \begin{center}
-                \caption{mlp Command Dependencies}
-                \label{mlpdepend}
-                \begin{tabular}{l|c|r}
-                  \textbf{Command:} & \textbf{Needs:} & \textbf{Generates:}\\
-                  \hline
-                  train & train.cfg & Potential.mtp \\
-                                    & pot.mtp & \\
-                  relax & to_relax.cfg & relaxed.cfg \\
-                                    & relax.ini & unrelaxed.cfg \\
-                                    & pot.mtp & candidates.cfg \\
-                  select-add & train.cfg & new_training.cfg \\
-                   & candidate.cfg & \\
-                \end{tabular}
-        \end{center}
-\end{table}
+  \begin{center}
+    \caption{mlp Command Dependencies}
+    \label{mlpdepend}
+    \begin{tabular}{r|c|l}
+      \textbf{Command:} & \textbf{Needs:} & \textbf{Generates:}\\
+      \hline
+      \verb|train| & \verb|train.cfg| & \verb|Potential.mtp| \\
+                        & \verb|pot.mtp| & \\
+      \verb|relax| & \verb|to_relax.cfg| & \verb|relaxed.cfg| \\
+                        &\verb|relax.ini| & \verb|unrelaxed.cfg| \\
+                        & \verb|pot.mtp| & \verb|candidates.cfg| \\
+      \verb|select-add| & \verb|train.cfg| & \verb|new_training.cfg| \\
+                        & \verb|candidate.cfg| & \\
+  \end{longtable}
+\end{center}
 
 \end{document}
