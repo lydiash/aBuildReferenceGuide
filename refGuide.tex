@@ -108,7 +108,7 @@ through the different commands needed to train the model.\\
 The commands start with python ``builder.py **YMAL**" and then the
 various tags are used to step through the training process. The python
 command is only used for the tags denoted by the `-'.
-**YMAL** is the yml file without the .yml extension.
+
 
 \begin{table}
         \begin{center}
@@ -125,13 +125,15 @@ command is only used for the tags denoted by the `-'.
                                  train.cfg and pot.mtp\\
                   qsub* jobscript\_setup.sh & mlp train: needs
                                              train.cfg, pot.mtp;
-                                             generates: Potential.mtp
-                  -set & 
+                                              generates:
+                                              Potential.mtp\\
+                  -setup\_relax & Builds candidate.cfg
+
                                                       
                  \end{tabular}
         \end{center}
 \end{table}
 
 *For Marylou use sbatch instead of qsub
-
+**YMAL** is the yml file without the .yml extension.
 \end{document}
