@@ -10,8 +10,12 @@ guide to aBuild and the skills you need to use it}
 \author{Lydia Harris and Eli Harris}
 
 \begin{document}
-
 \maketitle
+\begin{abstract}
+ The python module aBuild is meant to automate the process of
+ building a mtp model for a paticular system. The documents presented
+ in this folder/book are meant to be a reference guide to bash, git, aBuild, etc.
+\end{abstract}
 
 \section{Bash Commands}
 
@@ -54,7 +58,7 @@ to download one first. The Ubuntu app works great. See Table
     \verb|cd directory| & change directory \\ \hline
     \verb|cd .. |& go back a directory \\ \hline
     \verb|cd ../..| & go back two directories \\ \hline
-    \verb|cd ~ |& go to your root \\ \hline
+    \verb|cd ~ or cd |& go to your home directory \\ \hline
     \verb|pwd| & print working directory \\ \hline
     \verb|~/| & means your root \\ \hline
     \verb|.| & means the current directory \\ \hline
@@ -157,35 +161,7 @@ commands. \ref{aquamacs} has a list of Aquamacs specific things.
     ctrl+k ctrl+k & kills a whole line \\ \hline
     ctrl+shift+- & undo \\ \hline
     ctrl+u \verb|3 command| & executes the command 3 times \\ \hline
-  \end{longtable}
-\end{center}
-
-\begin{center}
-  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
-    \caption{Extra things in Aquamacs}
-    \label{aquamacs}
-    %first header
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endfirsthead
-    %next page header
-    \hline
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endhead
-    %footer
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\ \hline
-    \endfoot
-    %last footer
-    \hline
-    \endlastfoot
-    %contents of table
     ctrl+x ctrl+f & find and open a file (at the bottom of the screen)
-    \\ \hline
   \end{longtable}
 \end{center}
 
@@ -443,8 +419,10 @@ comprehensive list.
 Note: Atlassian has a good Git tutorial and reference guide. 
 
 \subsection{SSH key generation}
+
 %%%%% WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
 %%%%% WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
+See https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key
 
 \section{Initialization Process}
 To start working there are a series of steps and proceedure that must
@@ -579,6 +557,6 @@ command is only used for the tags denoted by the `-'.
   \end{longtable}
 \end{center}
 
-*For Marylou use sbatch instead of qsub
+*For Marylou use sbatch instead of qsub\\
 **YMAL** is the yml file without the .yml extension.
 \end{document}
