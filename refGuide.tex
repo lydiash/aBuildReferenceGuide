@@ -2,6 +2,8 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{relsize}
+\usepackage{float}
+\usepackage{longtable}
 
 \title{So You Want to do Materials Research:\\[0.02em]\smaller{}a
 guide to aBuild and the skills you need to use it}
@@ -15,75 +17,435 @@ guide to aBuild and the skills you need to use it}
 
 First things first, you need to learn to navigate your command
 line. Macs have a built in command line (terminal), but on Windows you will need
-to download one first. The Ubuntu app works great.
+to download one first. The Ubuntu app works great. See Table
+\ref{bashcommands} for a list of helpful commands. 
 
-\begin{table}
-        \begin{center}
-                \caption{Bash commands and what they mean}
-                \label{bashcommands}
-                \begin{tabular}{l|r}
-                        \textbf{Command} & \textbf{What it does}\\
-                        \hline
-                        ls & list contents of current directory \\
-                        ls -a & show hidden files too \\
-                        mkdir directory & make a new directory \\
-                        cd directory & change directory \\
-                        cd .. & go back a directory \\
-                        cd ../.. & go back two directories \\
-                        cd ~ & go to your root \\
-                        pwd & print working directory \\
-                        ~/ & means your root \\
-                        . & means the current directory \\
-                        cp file/to/copy where/it/goes/newName & copy
-                        a file \\
-                        cp file/to/copy . & copy a file to current
-                        directory without \\
-                         & changing the name \\
-                        cp files/* . & copy all the files in a
-                        directory \\
-                         & to the current directory \\
-                        cp -r directory new/directory & copy a
-                        directory recursively \\
-                        rm file/to/remove & remove a file \\
-                        rmdir directory & remove a directory \\
-                        rm -rf directory & blow away a directory
-                        permanently \\
-                        mv file/to/move where/it/goes/newName & moves
-                        or renames a file \\
-                        man command & show the manual for a command \\
-                        cat file/one file/two \textgreater new/file & concatonate
-                        two or more files into a new file \\
-                        history & shows a history of your commands \\
-                        less file/to/see & shows one page of a file \\
-                         & space turns the page q quits \\
-                        head file/to/see & see the first page of a file \\
-                        head -n 8 file/to/see & see the first 8 lines
-                        of a file \\
-                        tail file/to/see & see the last page of a file
-                        \\
-                        tail -n 10 file/to/see & see the last 10 lines
-                        of a file \\
-                        grep keyword file/to/search & search a file
-                        for a keyword and \\
-                         & print all the lines with that keyword to the screen \\
-                        history | grep keyword & search your history
-                        for a keyword \\
-                        grep keyword file/to/search \textbar wc -l & count
-                        the occurences of lines with a keyword \\
-                        command \textbar less & pipe the output of a command
-                        to less \\
-                        command \textgreater \textgreater file & append the output of a
-                        command to a file \\
-                        command \textgreater file & writes the output of the
-                        command to a file \\
-                        !command & executes the most recent command
-                        that \\
-                         & starts with the letters you typed \\
-                        echo & print something to the screen \\
-                 \end{tabular}
-        \end{center}
-\end{table}
-                        
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||} %longtable so it wraps pages
+    \caption{Bash commands and what they mean}
+    \label{bashcommands}
+    %make the main header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %make the next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %make the previous page footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %make the last footer
+    \hline
+    \endlastfoot
+    %contents of the table
+    \verb|ls| & list contents of current directory
+    \\ \hline
+    \verb|ls -a| & show hidden files too \\ \hline
+    \verb|ls -altr| & see the last changes made to
+    the files in a directory \\ \hline
+    \verb|mkdir directory| & make a new directory
+    \\ \hline
+    \verb|cd directory| & change directory \\ \hline
+    \verb|cd .. |& go back a directory \\ \hline
+    \verb|cd ../..| & go back two directories \\ \hline
+    \verb|cd ~ |& go to your root \\ \hline
+    \verb|pwd| & print working directory \\ \hline
+    \verb|~/| & means your root \\ \hline
+    \verb|.| & means the current directory \\ \hline
+    \verb|cp file/to/copy where/newName| & copy
+    a file \\ \hline
+    \verb|cp file/to/copy .| & copy a file to current
+    directory without changing the name \\ \hline
+    \verb|cp directory/* . |& copy all the files in a
+    directory \\ \hline
+    & to the current directory \\ \hline
+    \verb|cp -r directory new/directory| & copy a
+    directory recursively \\ \hline
+    \verb|rm file/to/remove| & remove a file \\ \hline
+    \verb|rmdir directory| & remove a directory \\ \hline
+    \verb|rm -rf directory| & blow away a directory
+    permanently \\ \hline
+    \verb|mv file/to/move where/newName| & moves
+    or renames a file \\ \hline
+    \verb|man command| & show the manual for a
+    command \\ \hline
+    \verb|cat file/one file/two| \textgreater \verb| new_file|
+    & concatonate two or more
+    files into a new file \\ \hline
+    \verb|history| & shows a history of your
+    commands \\ \hline
+    \verb|less file/to/see| & shows one page of a
+    file \\ \hline
+    & space turns the page q quits \\ \hline
+    \verb|head file/to/see| & see the first page
+    of a file \\ \hline
+    \verb|head -n 8 file/to/see| & see the first 8 lines
+    of a file \\ \hline
+    \verb|tail file/to/see| & see the last page of a file
+    \\ \hline
+    \verb|tail -n 10 file/to/see| & see the last 10 lines
+    of a file \\ \hline
+    \verb|grep keyword file/to/search| & search a file
+    for a keyword and print all the lines with
+    that
+    keyword
+    to the
+    screen \\ \hline
+    \verb|history |\textbar\verb| grep keyword| & search your history
+    for a keyword \\ \hline
+    \verb|grep keyword file/to/search|& count
+    the occurences of lines with a \\
+    \textbar \verb| wc -l| & keyword\\ \hline
+    \verb|command |\textbar \verb| less| & pipe the output of a command
+    to less \\ \hline
+    \verb|command |\textgreater\textgreater\verb| file|
+    & append the output of a
+    command to a file \\ \hline
+    \verb|command |\textgreater \verb| file| & writes the output of the
+    command to a file \\ \hline
+    \verb|!command| & executes the most recent command
+    that starts with the letters you typed \\ \hline
+    \verb|echo something| & print something to the screen \\\hline
+  \end{longtable}
+\end{center}
+
+\section{Emacs}
+
+Emacs is a text editor that has a bunch of cool shortcuts you can
+learn to make editing documents super easy. On a Mac you can download
+Aquamacs, which uses the same commands as Emacs but you can click with
+your mouse. \ref{emacs} Has a chart of basic Emacs
+commands. \ref{aquamacs} has a list of Aquamacs specific things. 
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}%longtable so it wraps pages
+    \caption{Emacs commands and what they mean}
+    \label{emacs}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last footer
+    \hline
+    \endlastfoot
+    %contents of table
+    \verb|emacs path/to/file| & enter emacs editor for
+    existing file or creates new file with that name \\ \hline
+    ctrl+x ctrl+c y & save and quit a file \\ \hline
+    ctrl+x ctrl+c n & quit without saving \\ \hline
+    ctrl+w & cut a line \\ \hline
+    ctrl+y & paste a line \\ \hline
+    ctrl+k & kills the contents of a line \\ \hline
+    ctrl+k ctrl+k & kills a whole line \\ \hline
+    ctrl+shift+- & undo \\ \hline
+    ctrl+u \verb|3 command| & executes the command 3 times \\ \hline
+  \end{longtable}
+\end{center}
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
+    \caption{Extra things in Aquamacs}
+    \label{aquamacs}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last footer
+    \hline
+    \endlastfoot
+    %contents of table
+    ctrl+x ctrl+f & find and open a file (at the bottom of the screen)
+    \\ \hline
+  \end{longtable}
+\end{center}
+
+\section{Bash Loops}
+
+Here's a table \ref{loops} of basic bash loops and logic, and a
+basic example \ref{loopexample} that relates to what we do.
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
+    \caption{Loops in bash}
+    \label{loops}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    % footer
+    \\ \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last footer
+    \hline
+    \endlastfoot
+    %contents of table
+      \verb|for i in {1..100}| & for 100 iterations \\
+      \verb|do|& \\
+      \verb|command $i| & do this thing(\verb|$i| \\
+      \verb|done| & references the index)\\
+      \hline
+      \verb|if [ condition ]| & check the condition \\
+      \verb|then| & if it's true \\
+      \verb|command| & do this \\
+      \verb|else| & if it's not \\
+      \verb|command| & do this \\
+      \verb|fi| & \\
+      \hline
+      \verb|if [ -e file ] |& check if a file exists \\
+  \end{longtable}
+\end{center}
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
+    \caption{Example of a Bash loop}
+    \label{loopexample}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last page footer
+    \hline
+    \endlastfoot
+    \verb|for i in {1..100}| & for 100 times \\
+    \verb|do| & \\
+    \verb|cd E.$i| & enter the directory named
+    \verb|E.#|\\
+    \verb|if [ -e KPOINTS ]| & if KPOINTS doesn't exist
+    \\
+    \verb|echo $i| & print the directory number \\
+    \verb|getKPoints| & run the getKPoints script \\
+    \verb|fi|
+    \verb|cd ..| & go back one directory \\
+    \verb|done|
+  \end{longtable}
+\end{center}
+
+
+%%%% DON'T KNOW WHERE THIS BELONGS IN THIS DOCUMENT BUT I'M GONNA TYPE
+%%%% IT UP SO THAT WE HAVE IT AND CAN PLACE IT LATER
+
+How to make and use a virtual environment to run python interactively, table \ref{venv}.
+
+\begin{center}
+  \begin{longtable}{||p{6.5cm}|p{4.5cm}||}
+    \caption{Build a virtual environment}
+    \label{venv}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last footer
+    \hline
+    \endlastfoot
+    %contents of table
+    \verb|mkdir environments| & make a directory to hold your
+    environments \\ \hline
+    \verb|cd environments| & go to that directory \\ \hline
+    \verb|python -m venv name_of_env| & make the
+    environment \\ \hline
+    \verb|emacs .bash_profile| & edit your
+    \verb|.bash_profile|\\ \hline
+    \verb|function workon {| & add these lines to it \\
+      \verb|source ~/environments/$1/bin/activate| & \\
+      \verb|}| & \\ \hline
+    ctrl+x ctrl+c y & save and quit the editor \\ \hline
+    \verb|source .bash_profile| & update your
+    \verb|.bash_profile|\\ \hline
+    \verb|workon name_of_env| & enters your environment
+    \\ \hline
+    ctrl+d & exits your environment \\ \hline
+  \end{longtable}
+\end{center}
+
+\section{Basics of Github}
+
+This section is by no means comprehensive. In fact, there's probably a
+lot of things missing. If you'd like to actually get good at Github,
+you have a lot more work to do. But here's some basics.
+
+The basic idea of Github is that several people can work on the same
+code at the same time. It also has version control: if you don't like
+the recent changes to your code, you can get rid of them by going back
+to an old version of the code. You can have a copy of the code on your
+machine to work on, and you can push your changes to the main copy of
+the code. Most people, however, don't have their repositories open to
+the public to edit. They will have to clear any suggested changes that
+you push. But as they make edits, you can pull their copy down to your
+machine. Github will warn you if there are any changes you have made
+to the code that will be overwritten by copying their changes. It's a
+powerful code sharing tool, but takes a little getting used to.
+
+First you need to go make a Github account. Then you can fork (make a
+copy of) whatever repository of code that you want to copy and
+edit. If you don't want to make edits to the code yourself, you don't
+have to make a fork, you can just copy directory from the original
+repository each time.
+To give your computer (or a remote computer) access to your repositories
+on Github, add your computer's public SSH key to Github. How to do
+this:
+On your command line execute the following command to copy
+your public ssh key:
+\begin{verbatim}
+pbcopy < ~/.ssh/id_rsa.pub
+\end{verbatim}
+Note: If this didn't work, it means you don't have a public key and will
+need to generate one. See the subsection below this for instructions
+on how to do that. 
+
+Now you will be able to paste this key into your account on Github. To
+do this, go to Settings>SSH and GPG keys>New SSH key. Make sure you
+name it something intuitive (e.g. My Mac, Marylou, etc.).
+
+Now you can copy code from Github to your machine. It's
+probably a good idea to make a directory to hold all the stuff you're
+going to copy with a name you'll recognize later (e.g. \verb|aBuild/|
+for aBuild, etc.). Usually these directories are in
+\verb|~/codes/|. Now there are several scenarios involving the code
+you're copying from Github. Here's a couple and what to do about them:
+
+1. If you just want to make a copy of the code and don't
+expect any changes to be made to it (like ever), use the following command:
+\begin{verbatim}
+git clone git@github.com:user/repository.git
+\end{verbatim}
+You can do this over and over again, it will just overwrite the code
+you copied to your machine. 
+
+2.
+a. If you expect to make your own changes to the code, start by making
+a fork of the original code on Github. Then add a master copy of your
+fork to your machine using the following command:
+\begin{verbatim}
+git remote add master git@github.com:user/repository.git
+\end{verbatim}
+b. If you have your own code that you would like to edit and put on
+Github for others to see, you will have to make your own repository on
+Github, then use the same command as above.
+
+3. If you want to be able to add someone else's updates to the code to
+your machine, the convention is to call their repository
+\verb|upstream|. You can add read only access to their repository to
+your machine with the following command:
+\begin{verbatim}
+git remote add upstream git@github.com:user/repository.git
+\end{verbatim}
+
+Now that you have a copy of the code, here's how to make changes to
+the code on your machine, and on Github from your machine. Here's a
+list of some basic Git commands \ref{git}. Remember that this is not a
+comprehensive list.
+
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||}
+    \caption{Basic Github commands}
+    \label{git}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last page footer
+    \hline
+    \endlastfoot
+    \verb|git checkout file/to/update| & make a copy of upstream's
+    version of the file on your machine \\ \hline
+    \verb|git pull upstream master| & update your master copy
+    with upstream's version \\ \hline
+    \verb|git status| & tells you the status of each file on your
+    machine with Github's copy \\ \hline
+    \verb|git add file/to/add| & add your version of the file to the
+    commit \\ \hline
+    \verb|git commit| & commit the changes
+    you added. Will open an editor for you to leave a comment\\ \hline
+    \verb|git commit -m "comment"|& commit the changes
+    you added and leave a comment \\ \hline
+    \verb|git push| & pushes your latest commit to your fork on Git \\ \hline
+    \verb|git push master upstream| & push your
+    request to add your changes to upstream \\ \hline
+  \end{longtable}
+\end{center}
+
+Note: Atlassian has a good Git tutorial and reference guide. 
+
+\subsection{SSH key generation}
+%%%%% WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
+%%%%% WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
+
 \section{Initialization Process}
 To start working there are a series of steps and proceedure that must
 be followed. The first step is to obtain an account to the supercomputer--likely
@@ -110,6 +472,7 @@ various tags are used to step through the training process. The python
 command is only used for the tags denoted by the `-'.
 
 
+
 \begin{table}
         \begin{center}
                 \caption{aBuild steps}
@@ -133,6 +496,88 @@ command is only used for the tags denoted by the `-'.
                  \end{tabular}
         \end{center}
 \end{table}
+
+
+
+\section{aBuild tags} %I don't know if this needs to be it's own
+% section. Just wanted to make a table of
+% dependencies and didn't know where it should
+% go.
+
+%%%%% The following two tables might be better suited to be
+%%%%% combined. It would create the dependencies for the workflow so
+%%%%% you'd know what order to execute all the commands in.
+
+\begin{center}
+  \begin{longtable}{||p{3cm}|p{4cm}|p{4cm}||}
+    \caption{aBuild tag dependencies}
+    \label{aBuilddepend}
+    %first header
+    \\ \hline
+    \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{3}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{3}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last page footer
+    \hline
+    \endlastfoot
+    %contents of table
+    \verb|-write| & \verb|.yml| file & VASP input files \\ \hline
+    \verb|-setup_train| & VASP output files & \verb|train.cfg| \\ 
+    & \verb|Potential.mtp| & \verb|pot.mtp| \\ \hline
+    \verb|-setup_relax| & %I think something goes here but not
+    % sure
+    &\verb|to_relax.cfg| \\
+    & & \verb|relax.ini| \\ \hline
+    \verb|-setep_select_add| & %???
+    & \verb|candidate.cfg| \\ \hline
+    \verb|-add| & \verb|new_training.cfg| & VASP input files \\ \hline
+  \end{longtable}
+\end{center}
+
+\begin{center}
+  \begin{longtable}{||p{3cm}|p{4cm}|p{4cm}||}
+    \caption{mlp command dependencies}
+    \label{mlpdepend}
+    % first header
+    \\ \hline
+    \textbf{Command} & \textbf{Needs} & \textbf{Generates}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{3}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{Needs} & \textbf{Generates}\\ \hline \hline
+    \endhead
+    %footer 
+    \multicolumn{3}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last page footer
+    \hline
+    \endlastfoot
+    %contents of table
+    \verb|train| & \verb|train.cfg| & \verb|Potential.mtp| \\
+    & \verb|pot.mtp| & \\ \hline
+    \verb|relax| & \verb|to_relax.cfg| & \verb|relaxed.cfg| \\
+    &\verb|relax.ini| & \verb|unrelaxed.cfg| \\
+    & \verb|pot.mtp| & \verb|candidates.cfg| \\ \hline
+    \verb|select-add| & \verb|train.cfg| & \verb|new_training.cfg| \\
+    & \verb|candidate.cfg| & \\ \hline
+  \end{longtable}
+\end{center}
 
 *For Marylou use sbatch instead of qsub
 **YMAL** is the yml file without the .yml extension.
