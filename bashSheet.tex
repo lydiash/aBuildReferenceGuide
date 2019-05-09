@@ -12,7 +12,7 @@
   \begin{longtable}{||p{5.5cm}|p{5.5cm}||} %longtable so it wraps pages
     \caption{Bash commands and what they mean}
     %make the main header
-    \hline
+    \\\hline
     \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endfirsthead
     %make the next page header
@@ -128,46 +128,28 @@
     %contents of table
     \verb|emacs path/to/file| & enter emacs editor for
     existing file or creates new file with that name \\ \hline
+    ctrl+x ctrl+s & save file \\ \hline
     ctrl+x ctrl+c y & save and quit a file \\ \hline
     ctrl+x ctrl+c n & quit without saving \\ \hline
-    ctrl+w & cut a line \\ \hline
+    ctrl+w & cut a line (highlight line first) \\ \hline
     ctrl+y & paste a line \\ \hline
-    ctrl+k & kills the contents of a line \\ \hline
-    ctrl+k ctrl+k & kills a whole line \\ \hline
+    ctrl+k & kills the contents of a line/cut a line \\ \hline
+    ctrl+k ctrl+k ... & kills however many lines--helpful to copy and
+                        paste blocks of code \\ \hline
     ctrl+shift+- & undo \\ \hline
     ctrl+u \verb|3 command| & executes the command 3 times \\ \hline
+    ctrl+x ctrl+f & find and open a file (at the bottom of the screen)\\ \hline
+    ctrl+space & set marker \\ \hline
+    \multicolumn{2}{||c||}
+    {Add text to a block of code}
+    \\ \hline
+    ctrl+space & set marker \\ 
+    ctrl+x & set end of rectangle\\
+    T ``text" & add text\\ 
+    or k & or delete  \\                
+                    
   \end{longtable}
 \end{center}
-
-
-\begin{center}
-  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
-    \caption{Extra things in Aquamacs}
-    %first header
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endfirsthead
-    %next page header
-    \hline
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endhead
-    %footer
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\ \hline
-    \endfoot
-    %last footer
-    \hline
-    \endlastfoot
-    %contents of table
-    ctrl+x ctrl+f & find and open a file (at the bottom of the screen)
-    \\ \hline
-  \end{longtable}
-\end{center}
-
 
 \begin{center}
   \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
@@ -193,19 +175,19 @@
     \hline
     \endlastfoot
     %contents of table
-      \verb|for i in {1..100}| & for 100 iterations \\
-      \verb|do|& \\
-      \verb|command $i| & do this thing(\verb|$i| \\
-      \verb|done| & references the index)\\
-      \hline
-      \verb|if [ condition ]| & check the condition \\
-      \verb|then| & if it's true \\
-      \verb|command| & do this \\
-      \verb|else| & if it's not \\
-      \verb|command| & do this \\
-      \verb|fi| & \\
-      \hline
-      \verb|if [ -e file ] |& check if a file exists \\
+    \verb|for i in {1..100}| & for 100 iterations \\
+    \verb|do|& \\
+    \verb|command $i| & do this thing(\verb|$i| \\
+    \verb|done| & references the index)\\
+    \hline
+    \verb|if [ condition ]| & check the condition \\
+    \verb|then| & if it's true \\
+    \verb|command| & do this \\
+    \verb|else| & if it's not \\
+    \verb|command| & do this \\
+    \verb|fi| & ends if statement \\
+    \hline
+    \verb|if [ -e file ] |& check if a file exists \\
   \end{longtable}
 \end{center}
 
@@ -241,8 +223,43 @@
     \verb|getKPoints| & run the getKPoints script \\
     \verb|fi|
     \verb|cd ..| & go back one directory \\
-    \verb|done|
+    \verb|done|& close loop\\
+  \end{longtable}
+\end{center}
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
+    \caption{Example of a Bash loop}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last page footer
+    \hline
+    \endlastfoot
+    for i \`{}ls -d */\`{} & for all directories \\
+    \verb|do| & \\
+    \verb|cd $i| & enter the directory named\\
+    \verb|if [! -f KPOINTS]|& if KPOINTS doesn't exist\\
+    \verb|then getKPoints| & run the getKPoints script \\
+    \verb|echo $i| & print the directory number \\
+    \verb|fi| & end if statement\\
+    \verb|cd ..| & go back one directory \\
+    \verb|done|& close loop\\
   \end{longtable}
 \end{center}
 
 \end{document}
+
