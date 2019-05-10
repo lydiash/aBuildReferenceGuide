@@ -27,16 +27,89 @@ have not yet made an account, go to marylou.byu.edu click on request
 and account. Your faculty mentor (most likely Brother Nelson) will
 need to approve your account. Once you have an account...
 If you are using mac or linux simply open the terminal and use the ssh
-command.  If you have a windows machine you have several options you
-can either use the ubuntu app, , ,.... figure out the rest.
+command (see bash commands).  If you have a windows machine you have
+several options you can either use the ubuntu app, windows power
+shell, widows terminal, ,.... etc.
+
+\subsection{Make directories}
+Once logged into the supercomputer you will need to build the
+following directories (See Bash Commands):\\
+\indent 1. \verb|\home\|codes\verb|\|aBuild\\
+\indent 2. \verb|\home\|bin\\
+\indent 3. \verb|\home\|environments\\
+\indent 2. \verb|\home\|Species-system (i.e. AgPt) 
+
+\subsection{Download aBuild}
+Now it is time to download aBuild. The python module aBuild is meant
+to automate the process of building a mtp model for a paticular
+system. The module is continueuously undergoing improvements. To have
+version contronal we use git. If you are unfamiliar with git go read
+the git tutorial section. Git is an extreemly helpful tool and used
+across many different organizations. Once you become familiar with
+git, fork/download aBuild from 
+\subsection{Virtual Environment/bash\_script}
+Description of how to create a virtual environment and the need
+changes to the \verb|.bash_profile|.
+
+\subsection{Copy necessary Vasp information??}
+
+\section{Run aBuild: Training Process}                      
+Now that you have your account all set up, you are ready to start
+training the model to your specific system. The python module aBuild
+is designed to automate the train of the model process. This section
+will guild you through the different commands needed to train the model.\\
+
+The commands start with python ``builder.py **YMAL**" and then the
+various tags are used to step through the training process. The python
+command is only used for the tags denoted by the `-'.
 
 
+
+\begin{center}
+  \begin{longtable}{||p{5.5cm}|p{5.5cm}||} %longtable so it wraps %
+    % pages   
+    \caption{aBuild steps and description}
+    \label{bashcommands}
+    \\ \hline
+    \textbf{Step} & \textbf{Description}\\ \hline \hline
+    \endhead
+    %make the previous page footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %make the last footer
+    \hline
+    \endlastfoot
+    %contents of the table
+
+    -enum & Looks for possible crystal structures to
+            enumerate through\\
+    -write -rgk & Build the training set folder and run
+                  the getKPoints script\\
+    -setup\_train & Pull data from VASP folders, Build
+                    train.cfg and pot.mtp\\
+    qsub* jobscript\_setup.sh & mlp train: needs train.cfg, pot.mtp;
+                                generates: Potential.mtp\\
+    -setup\_relax & Builds candidate.cfg
+  \end{longtable}
+\end{center}
 
 \section{Bash Commands}
 
 First things first, you need to learn to navigate your command
-line. Macs have a built in command line (terminal), but on Windows you will need
-to download one first. The Ubuntu app works great. See Table
+line. Macs have a built in command line (terminal). On Windows, there
+are several options:\\
+\indent 1. Windows Powershell. See:
+https://docs.microsoft.com/en-us/windows-
+server/administration/windows-commands/powershell
+for instructions on how to configure your pc to use it.\\
+\indent 2. The Ubuntu app--simply search for it in your windows store.\\
+\indent 3. Windows recently came out with Windows Terminal as a 
+central place for all the commandline userfaces.\\ 
+\indent 4. Other apps such as:...\\
+Bash allows to add input into the computer from a powerfull
+commandline. See Table
 \ref{bashcommands} for a list of helpful commands. 
 
 \begin{center}
@@ -134,53 +207,7 @@ to download one first. The Ubuntu app works great. See Table
   \end{longtable}
 \end{center}
 
-\section{Emacs}
-
-Emacs is a text editor that has a bunch of cool shortcuts you can
-learn to make editing documents super easy. On a Mac you can download
-Aquamacs, which uses the same commands as Emacs but you can click with
-your mouse. \ref{emacs} Has a chart of basic Emacs
-commands. \ref{aquamacs} has a list of Aquamacs specific things. 
-
-\begin{center}
-  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}%longtable so it wraps pages
-    \caption{Emacs commands and what they mean}
-    \label{emacs}
-    %first header
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endfirsthead
-    %next page header
-    \hline
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endhead
-    %footer
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\ \hline
-    \endfoot
-    %last footer
-    \hline
-    \endlastfoot
-    %contents of table
-    \verb|emacs path/to/file| & enter emacs editor for
-    existing file or creates new file with that name \\ \hline
-    ctrl+x ctrl+c y & save and quit a file \\ \hline
-    ctrl+x ctrl+c n & quit without saving \\ \hline
-    ctrl+w & cut a line \\ \hline
-    ctrl+y & paste a line \\ \hline
-    ctrl+k & kills the contents of a line \\ \hline
-    ctrl+k ctrl+k & kills a whole line \\ \hline
-    ctrl+shift+- & undo \\ \hline
-    ctrl+u \verb|3 command| & executes the command 3 times \\ \hline
-    ctrl+x ctrl+f & find and open a file (at the bottom of the screen)
-  \end{longtable}
-\end{center}
-
-\section{Bash Loops}
+\subsection{Bash Loops}
 
 Here's a table \ref{loops} of basic bash loops and logic, and a
 basic example \ref{loopexample} that relates to what we do.
@@ -262,6 +289,54 @@ basic example \ref{loopexample} that relates to what we do.
     \verb|done|
   \end{longtable}
 \end{center}
+
+
+\section{Emacs}
+
+Emacs is a text editor that has a bunch of cool shortcuts you can
+learn to make editing documents super easy. On a Mac you can download
+Aquamacs, which uses the same commands as Emacs but you can click with
+your mouse. \ref{emacs} Has a chart of basic Emacs
+commands. \ref{aquamacs} has a list of Aquamacs specific things. 
+
+\begin{center}
+  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}%longtable so it wraps pages
+    \caption{Emacs commands and what they mean}
+    \label{emacs}
+    %first header
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endfirsthead
+    %next page header
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
+    \\ \hline
+    \textbf{Command} & \textbf{What it does}\\ \hline \hline
+    \endhead
+    %footer
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %last footer
+    \hline
+    \endlastfoot
+    %contents of table
+    \verb|emacs path/to/file| & enter emacs editor for
+    existing file or creates new file with that name \\ \hline
+    ctrl+x ctrl+c y & save and quit a file \\ \hline
+    ctrl+x ctrl+c n & quit without saving \\ \hline
+    ctrl+w & cut a line \\ \hline
+    ctrl+y & paste a line \\ \hline
+    ctrl+k & kills the contents of a line \\ \hline
+    ctrl+k ctrl+k & kills a whole line \\ \hline
+    ctrl+shift+- & undo \\ \hline
+    ctrl+u \verb|3 command| & executes the command 3 times \\ \hline
+    ctrl+x ctrl+f & find and open a file (at the bottom of the screen)
+  \end{longtable}
+\end{center}
+
 
 
 %%%% DON'T KNOW WHERE THIS BELONGS IN THIS DOCUMENT BUT I'M GONNA TYPE
@@ -428,6 +503,7 @@ comprehensive list.
     \verb|git push| & pushes your latest commit to your fork on Git \\ \hline
     \verb|git push master upstream| & push your
     request to add your changes to upstream \\ \hline
+    \verb|git log| & See history of most recent commits \\ \hline
   \end{longtable}
 \end{center}
 
@@ -437,7 +513,7 @@ Note: Atlassian has a good Git tutorial and reference guide.
 
 %%%%% WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
 %%%%% WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
-See https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key
+See https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent\#generating-a-new-ssh-key
 
 \section{Initialization Process}
 To start working there are a series of steps and proceedure that must
@@ -446,49 +522,9 @@ marylou. After setting up and account and logging on, you will need to
 make several directories and download aBuild.  
 \subsection{aBuild Download}
 1. Become familiar with git --see git tutorial
-\subsection{Make directories}
-You will need to build the following directories:\\
-\indent 1. .\verb|\|codes\verb|\|aBuild\\
-\indent 2. \verb|\|bin\\
-\indent 3. \verb|\|environments\\
-\indent 2. \verb|\|Species-system (i.e. AuCu)
 
 \subsubsection{bin directory}
-\section{Training Process}                      
-Once you have set up your system you are ready to start training the
-model to your specific system. The python module aBuild is designed to
-automate the train of the model process. This section will guild you
-through the different commands needed to train the model.\\
 
-The commands start with python ``builder.py **YMAL**" and then the
-various tags are used to step through the training process. The python
-command is only used for the tags denoted by the `-'.
-
-
-
-\begin{table}
-        \begin{center}
-                \caption{aBuild steps}
-                \label{bashcommands}
-                \begin{tabular}{l|r}
-                  \textbf{Step} & \textbf{Description}\\
-                  \hline
-                  -enum & Looks for possible crystal structures to
-                          enumerate through\\
-                  -write -rgk & Build the training set folder and run
-                                the getKPoints script\\
-                  -setup\_train & Pull data from VASP folders, Build
-                                 train.cfg and pot.mtp\\
-                  qsub* jobscript\_setup.sh & mlp train: needs
-                                             train.cfg, pot.mtp;
-                                              generates:
-                                              Potential.mtp\\
-                  -setup\_relax & Builds candidate.cfg
-
-                                                      
-                 \end{tabular}
-        \end{center}
-\end{table}
 
 
 
