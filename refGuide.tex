@@ -63,8 +63,6 @@ The commands start with python ``builder.py **YMAL**" and then the
 various tags are used to step through the training process. The python
 command is only used for the tags denoted by the `-'.
 
-
-
 \begin{center}
   \begin{longtable}{||p{5.5cm}|p{5.5cm}||} %longtable so it wraps %
     % pages   
@@ -87,13 +85,25 @@ command is only used for the tags denoted by the `-'.
             enumerate through\\
     -write -rgk & Build the training set folder and run
                   the getKPoints script\\
-    -setup\_train & Pull data from VASP folders, Build
+    -setup\_train & Pull data from VASP folders, Builds
                     train.cfg and pot.mtp\\
     qsub* jobscript\_setup.sh & mlp train: needs train.cfg, pot.mtp;
                                 generates: Potential.mtp\\
-    -setup\_relax & Builds candidate.cfg
+    -setup\_relax & Builds to-relax.cfg and relax.ini; runs calc-grade\\
+    qusb* jobscript\_relax.sh & mlp relax: needs to-relax.cfg, pot.mtp, and
+                                relax.ini; generates: relaxed.cfg,
+                                unrelaxed.cfg, and candidates.cfg\\
+    -setup\_select\_add & Builds candidate.cfg\\ %is there a difference
+                                %between candidate.cfg and candidates.cfg
+    qsub* jobscript\_select & mlp select-add: generates:
+                              new\_training.cfg; need train.cfg, candidate.cfg\\
+    go back to step -setup\_train & Repeat until model is fully trained. \\
+                              
+    
   \end{longtable}
 \end{center}
+*For Marylou use sbatch instead of qsub\\
+**YMAL** is the yml file without the .yml extension.
 
 \section{Bash Commands}
 
@@ -525,9 +535,6 @@ make several directories and download aBuild.
 
 \subsubsection{bin directory}
 
-
-
-
 \section{aBuild tags} %I don't know if this needs to be it's own
 % section. Just wanted to make a table of
 % dependencies and didn't know where it should
@@ -608,6 +615,4 @@ make several directories and download aBuild.
   \end{longtable}
 \end{center}
 
-*For Marylou use sbatch instead of qsub\\
-**YMAL** is the yml file without the .yml extension.
 \end{document}
