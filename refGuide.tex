@@ -63,8 +63,6 @@ The commands start with python ``builder.py **YMAL**" and then the
 various tags are used to step through the training process. The python
 command is only used for the tags denoted by the `-'.
 
-
-
 \begin{center}
   \begin{longtable}{||p{5.5cm}|p{5.5cm}||} %longtable so it wraps %
     % pages   
@@ -87,13 +85,66 @@ command is only used for the tags denoted by the `-'.
             enumerate through\\
     -write -rgk & Build the training set folder and run
                   the getKPoints script\\
-    -setup\_train & Pull data from VASP folders, Build
+    -setup\_train & Pull data from VASP folders, Builds
                     train.cfg and pot.mtp\\
     qsub* jobscript\_setup.sh & mlp train: needs train.cfg, pot.mtp;
                                 generates: Potential.mtp\\
-    -setup\_relax & Builds candidate.cfg
+    -setup\_relax & Builds to-relax.cfg and relax.ini; runs calc-grade\\
+    qusb* jobscript\_relax.sh & mlp relax: needs to-relax.cfg, pot.mtp, and
+                                relax.ini; generates: relaxed.cfg,
+                                unrelaxed.cfg, and candidates.cfg\\
+    -setup\_select\_add & Builds candidate.cfg\\ %is there a difference
+                                %between candidate.cfg and candidates.cfg
+    qsub* jobscript\_select & mlp select-add: generates:
+                              new\_training.cfg; need train.cfg, candidate.cfg\\
+    go back to step -setup\_train & Repeat until model is fully trained. \\
+                              
+    
   \end{longtable}
 \end{center}
+*For Marylou use sbatch instead of qsub\\
+**YMAL** is the yml file without the .yml extension.
+
+The training process will take several iteration before the model is
+able to relax the atoms.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%More description of the relax and sequential steps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Theory}
+In this section we discuss what the alogorithms are doing or the
+theory behind the computations. The overview picture is to create a
+MTP model from Vasp calculations. The Vasp calculations are ab initio
+or first principle calculations that us DFT and/or DFT+U depending on
+the specific system and if spin must be considered. The mtp then is
+trained by an optimzation fitting the coefficients of the basis
+functions--see MTP for more details. After the model has been trained
+it attempts to relax the atoms to their happen place. On the first
+iteration the model will likely be unable to relax an of the
+configurations. The model then selects more configurations to add to
+the train set. These configurations are then calculated using Vasp and
+the cycle continues until the model is able to relax all of the
+configurations.
+
+The motivation of training a mtp model comes from the bottleneck of
+Vasp calculations. In searching for configurations to create the
+convex hull the configuration space for vary concentrations is so vast
+that using DFT calculation becomes impracticle due to the amount of
+time the calculation take. By using an mtp training model we are able
+to explore much more of the configuration space in signicantly less
+time. Thus, allowing us to potentially discover new configurations of
+a paticular system. For further detail see ref \cite{} 
+
+\subsection{MTP}
+
+\subsection{DFT}
+
+\subsubsection{DFT+U}
+
+\subsection{Optimization Routines}
+
+\subsection{Convex Hull}
 
 \section{Bash Commands}
 
@@ -525,41 +576,6 @@ make several directories and download aBuild.
 
 \subsubsection{bin directory}
 
-
-\section{Training Process}                      
-Once you have set up your system you are ready to start training the
-model to your specific system. The python module aBuild is designed to
-automate the train of the model process. This section will guild you
-through the different commands needed to train the model.\\
-
-The commands start with python ``builder.py **YAML**" and then the
-various tags are used to step through the training process. The python
-command is only used for the tags denoted by the `-'.
-
-
-
-\begin{table}
-        \begin{center}
-                \caption{aBuild steps}
-                \label{bashcommands}
-                \begin{tabular}{l|r}
-                  \textbf{Step} & \textbf{Description}\\
-                  \hline
-                  -enum & Looks for possible crystal structures to
-                          enumerate through\\
-                  -write -rgk & Build the training set folder and run
-                                the getKPoints script\\
-                  -setup\_train & Pull data from VASP folders, Build
-                                 train.cfg and pot.mtp\\
-                  qsub* jobscript\_setup.sh & mlp train: needs
-                                             train.cfg, pot.mtp;
-                                              generates:
-                                              Potential.mtp\\
-                  -setup\_relax & Builds candidate.cfg
-
-
-
-
 \section{aBuild tags} %I don't know if this needs to be it's own
 % section. Just wanted to make a table of
 % dependencies and didn't know where it should
@@ -639,11 +655,5 @@ command is only used for the tags denoted by the `-'.
     & \verb|candidate.cfg| & \\ \hline
   \end{longtable}
 \end{center}
-
-*For Marylou use sbatch instead of qsub\\
-**YMAL** is the yml file without the .yml extension.
-
-*For Marylou use sbatch instead of qsub
-**YAML** is the yml file without the .yml extension.
 
 \end{document}
