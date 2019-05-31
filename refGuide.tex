@@ -4,6 +4,7 @@
 \usepackage{relsize}
 \usepackage{float}
 \usepackage{longtable}
+\usepackage[dvipsnames]{xcolor}
 
 \title{So You Want to do Materials Research:\\[0.02em]\smaller{}a
 guide to aBuild and the skills you need to use it}
@@ -64,14 +65,15 @@ various tags are used to step through the training process. The python
 command is only used for the tags denoted by the `-'.
 
 \begin{center}
-  \begin{longtable}{||p{5.5cm}|p{5.5cm}||} %longtable so it wraps %
+  \begin{longtable}{||p{4cm}|p{7cm}||} %longtable so it wraps %
     % pages   
     \caption{aBuild steps and description}
     \label{bashcommands}
     \\ \hline
     \textbf{Step} & \textbf{Description}\\ \hline \hline
     \endhead
-    %make the previous page footer
+    % make the previous page footer
+    \hline
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued on next
         page}} \\ \hline
@@ -82,22 +84,39 @@ command is only used for the tags denoted by the `-'.
     %contents of the table
 
     -enum & Looks for possible crystal structures to
-            enumerate through\\
+            enumerate through \textcolor{red}{--run interactively}\\
     -write -rgk & Build the training set folder and run
-                  the getKPoints script\\
+                  the getKPoints script \textcolor{red}{--run interactively}\\
     -setup\_train & Pull data from VASP folders, Builds
-                    train.cfg and pot.mtp\\
-    qsub* jobscript\_setup.sh & mlp train: needs train.cfg, pot.mtp;
-                                generates: Potential.mtp\\
-    -setup\_relax & Builds to-relax.cfg and relax.ini; runs calc-grade\\
+                    train.cfg and pot.mtp \textcolor{red}{--run interactively} \\
+    qsub* jobscript\_train.sh & mlp train: needs train.cfg, pot.mtp;
+                                generates: Potential.mtp \textcolor{red}{--job
+                    submission, parallel, 10-20 cores, 6-12 hrs}\\
+    -setup\_relax & Builds to-relax.cfg and relax.ini; runs calc-grade
+                    \textcolor{red}{--run interactively}\\
     qusb* jobscript\_relax.sh & mlp relax: needs to-relax.cfg, pot.mtp, and
                                 relax.ini; generates: relaxed.cfg,
-                                unrelaxed.cfg, and candidates.cfg\\
-    -setup\_select\_add & Builds candidate.cfg\\ %is there a difference
-                                %between candidate.cfg and candidates.cfg
+                                unrelaxed.cfg, and candidates.cfg \textcolor{red}{--job
+                    submission, parallel, 10-30 cores, 6-30 hrs}\\
+    -setup\_select\_add & Concatenate all of the candidate.cfg\_\# into
+                          one candidate.cfg and remove all of the
+                          other ones,Concatenate all of the
+                          selection.log\_* files into one
+                          file. Concatenate all of the relaxed.cfg\_\#
+                          into one file.  This file should get bigger
+                          and bigger with each iteration, Build a
+                          submission script. candidate.cfg \textcolor{red}{--run interactively}\\
     qsub* jobscript\_select & mlp select-add: generates:
-                              new\_training.cfg; need train.cfg, candidate.cfg\\
-    go back to step -setup\_train & Repeat until model is fully trained. \\
+                              new\_training.cfg; need train.cfg,
+                              candidate.cfg \textcolor{red}{--job
+                              submission, single core, 1-4 hrs}\\
+    -add & builds A folders in training set and creates jobscript \textcolor{red}{--run interactively}\\
+    qsub* jobscript (inside training set) & runs vasp calculations for
+                                            unrelaxed configurations
+                                            \textcolor{red}{--array
+                                            job, 6-30 hrs}\\ 
+    go back to step -setup\_train & Repeat until model is fully
+                                    trained, i.e. all structures relax.\\
                               
     
   \end{longtable}
@@ -145,6 +164,8 @@ a paticular system. For further detail see ref \cite{}
 \subsection{Optimization Routines}
 
 \subsection{Convex Hull}
+
+\subsection{}
 
 \section{Bash Commands}
 
