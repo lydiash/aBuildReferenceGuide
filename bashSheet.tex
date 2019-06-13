@@ -99,6 +99,15 @@
     \verb|!command| & executes the most recent command
     that starts with the letters you typed \\ \hline
     \verb|echo something| & print something to the screen \\\hline
+    \verb|ls -altr| & see when files in the directory were last
+                      altered \\\hline
+    \verb|sed -i 's/to replace/new phrase/' file/to/search| & find and
+                                                              replace a phrase in a file \\\hline
+    \verb|grep -Rl keyword| & recursively search for a keyword and
+                              print the file it was found in \\\hline
+    \verb|awk '!a[$0]++' file/to/search| & get rid of duplicate lines
+    \\\hline
+    \verb|echo "phrase" >> file/to/append| & append a phrase to a file \\\hline
   \end{longtable}
 \end{center} 
 
@@ -186,8 +195,10 @@
     \verb|else| & if it's not \\
     \verb|command| & do this \\
     \verb|fi| & ends if statement \\
-    \hline
     \verb|if [ -e file ] |& check if a file exists \\
+    \verb|for i in `ls -d */`; do cd $i; command; cd ..; done| &enter
+                                                                 every directory in the current directory \\
+    \hline
   \end{longtable}
 \end{center}
 
