@@ -668,6 +668,11 @@ represent it in 2 dimensions, like in figure \ref{fig:3dchull}.
 \section*{Appendix A: VASP files and what they do} \label{sec:vaspinput} %%%TODO
 Pretty self explanatory name. If you want to learn a bit more about
 VASP, this is a good section to read.
+
+In order to run any Vasp calculation, you need a POSCAR, POTCAR,
+INCAR, PRECALC, and KPOINTS. The rest of these files are output
+files. There are a couple other output files I haven't mentioned
+here. 
 %I'll have to come back and add some stuff in here later.... This might
 %be better if it wasn't an appendix and just a section in the regular
 %ref guide. 
@@ -724,14 +729,16 @@ This is the ``OUTput'' car. It has some of the output in it. You can
 converged, you will see ``\verb|free  energy|'' with two spaces.
 
 \subsection*{CONTCAR}
-
-\subsection*{CONTCAR}
-If you let the atoms relax, this is the new POSCAR. Kinda. It just
-specifies the new positions of the atoms. 
+This is an output file. If you let the atoms relax, this is the new POSCAR. Kinda. It just
+specifies the new positions of the atoms. Also I'm not sure what the
+``CONT'' is. 
 
 \subsection*{CHGCAR}
+Not sure, maybe the ``CHarGe'' car? Ask Brother Nelson
 
 \subsection*{OSZICAR}
+This has how many iterations Vasp has done in it. I'm not sure what
+other purpose it serves, and I'm also not sure what the ``OSZI'' is. 
 
 
 \section*{Appendix B: Bash Commands} \label{sec:bash}
