@@ -1,0 +1,199 @@
+#name this anything you'd like, but this is a nice convention to follow
+title: 'AgPd Alloy Database' 
+# Ordered list of species; this is the same order as should be in the
+# POTCAR file for VASP calculations. You can have 2 or 3
+species:
+  - 'Au'
+  - 'Pt'
+# Directory in which the database folder system will be created.
+root: '~/AuPt'
+# These are global settings for INCAR, POTCAR, and KPOINTS that will
+# be applied to *all* the VASP calculations in all databases. They can
+# be overridden in each database.
+calculator:
+  #theres some other software programs we can make input files for with aBuild.
+  #You'll probably only need vasp here
+  active: 'vasp_and_lammps_and_qe' 
+  vasp:
+    #in very special cases you might need this AFM section. Otherwise comment it out
+    AFM: #if you'd like to make a structure antiferromagnetic, specify the details here
+      plane: [1,0,0] #plane to align spin on 
+      spin_type: 0 #which atom gets the spin. Remember the species list is in reverse alphabetical order
+    #these are the settings that will be written in the INCAR for each vasp calculation. Add extra if you've
+    #done some research about it (and probably talked to Br. Nelson), otherwise these are probably fine
+    incar:
+      prec: 'a'
+      #this is the energy cutoff for the planewave basis set.. the default is probably fine but if you want to
+      #test this out, see the ref guide to learn some more about this.
+      #  encut: 400
+      #  isym: 0
+      lwave: False
+      lreal: 'auto'
+
+      #ediff: 0.00001
+      ismear: 1
+      sigma: 0.1
+    #these are the POTCARS you're gonna use. ask Br. Nelson for the directory to use
+    potcars:
+      directory: '/apps/restricted/easybuild/software/VASP/5.3.2-ictcet-4.5.0/pot'
+      xc: 'PBE'
+      #you'll have to open up the POSCARS in the directory and see what the date is at the top
+      #of them, and type them here
+      versions:
+        Au: '04Oct2007'
+        Pt: '12Dec2005'
+      #there are some ideal setups for different systems, see
+      #https://cms.mpi.univie.ac.at/vasp/vasp/Recommended_PAW_potentials_DFT_calculations_using_vasp_5_2.html
+      #for the recommended ones. 
+      setups:
+        Au: ''
+        Pt: '_pv'
+    kpoints:
+      method : 'mueller'
+      #there are some methods to determine the best mindistance. See the ref guide to learn more about this..
+      #but 70 is probably fine
+      mindistance: 70  # Bigger numbers mean denser meshes
+      KPPRA: 2000
+
+  #these are the settings for quantum espresso, if you use it. If "qe" isn't in the active section, don't
+  #worry about changing this section, it won't read it anyways
+  qe:
+    pseudopotentials:
+      directory: '/home/nelslanc/codes/q-e/pslibrary/pbe/PSEUDOPOTENTIAL'
+      versions:
+        Au: Au.pbe-spfn-rrkjus_psl.1.0.0.UPF
+        Pt: Pt.pbe-spfn-rrkjus_psl.1.0.0.UPF
+
+    kpoints:
+      method: 'mp'
+      KPPRA: 2000
+  #these are the settings for lammps, if you use it. If "lammps" isn't in the active section, don't
+  #worry about changing this section, it won't read it anyways
+  lammps:
+    template: 'lammps.in'
+    potential: 'PtAu.eam.alloy'
+
+# Parameters for the job arrays that will be submitted for each
+# database. These can be overridden in each database below as well.
+  execution:
+    template: 'run_array_falcon.sh'
+    time: 10 #walltime for calcs. Probably doesn't hurt to make it a little longer than you expect it to take
+    ntasks: 1
+    nodes: 1 #how many nodes you want to parallelize on. Doesn't help if the code isn't written in parallel.
+    mem_per_cpu: 8 #how much memory you'll need for calcs. Better to be safe than sorry on these
+    job_name: 'Hf-Ni-Si DB' #Change this for your system. It's what the job will be called 
+  #  partition: 'physics'
+    array_limit: 150 #if you want to let only a certain amount of calcs in a job array to run at once. 
+    #this is the command that will be executed. you may want to add a "> vasp_output" so the output
+    #gets written to a file called vasp_output
+    exec_path: 'vasp6.x' 
+  #  options:
+  #    - "--qos=msg"
+  #    - "-C knl"
+# Next, we include a list of all the databases we want to create. A
+# database following this pattern is created *for each* of the seed
+# configurations listed above.
+trainingset: #this is the initial enumeration settings
+  #The PhononBase class generates the dynamical matrix that is needed
+  #by PhononDatabase.
+  name: 'enumerated'  # I get to choose the name
+  #put the lattice types you want to enumerate here. fcc hcp and bcc are probably fine,
+  #but you can add a custom one like is done here, as well.
+  lattice:
+    - "fcc"
+    - "hcp"
+    - "bcc"
+    - [[0.5,0.5,0],[0.5,0,0.5],[0,0.5,0.5]]
+  #fcc hcp and bcc are already known by aBuild. You'll have to include any custom basis though
+  basis:
+    - None
+    - None
+    - None
+    - [[0,0,0],[0.25,0.25,0.25],[0.75,0.75,0.75]]
+  #this is the coordinate system you want to write the POSCARS in. "D" means direct.
+  #You could also do "C" for cartesian
+  coordsys:
+    - "D"
+    - "D"
+    - "D"
+    - "D"
+  #custom lattice types need a name. the rest can be given "none"
+  name:
+    - None
+    - None
+    - None
+    - "fluorite"
+#  concs: [ [], [[0,1,2] , [0,1,4]] ] #you can restrict the concentrations here. [0,1,2] means you want to restrict the conc to 0/2-1/2
+  nconfigs: [2,2,2,2]  # One number per lattice defined in the lattice variable. These should probably be 0 (to start from empty)
+#  siteRestrictions: [['0/1'],['0/1','0/1']] #you can also restrict the sites, not sure how that works though. Ask Br. Nelson
+  sizes: [[1,12],[1,6],[1,12],[1,8]] #These are the sizes of cells that will be enumerated
+#        ran_seed: 10
+gss: # Structures to put in the set of structures for mtp to relax
+  name: 'gss'
+  #same settings as in trainingset
+  lattice:
+    - "fcc"
+    - "bcc"
+    - "hcp"
+    - "protos" #protos are unique structures that are kept in a database. Talk to Br. Nelson about whether or not to include these
+    - [[0.5,0.5,0],[0.5,0,0.5],[0,0.5,0.5]]
+  basis:
+    - None
+    - None
+    - None
+    - None
+    - [[0,0,0],[0.25,0.25,0.25],[0.75,0.75,0.75]]
+  coordsys:
+    - "D"
+    - "D"
+    - "D"
+    - "C"
+    - "D"
+  name:
+    - None
+    - None
+    - None
+    - None
+    - "fluorite"
+#  concs: [ [], [[0,1,2] , [0,1,4]] ]
+#  siteRestrictions: [['0/1'],['0/1','0/1']]
+  sizes: [[1,12],[1,6],[1,12],[1,10],all]
+  nconfigs: [6,6,6,all,6] #these should probably be really large numbers (e.g. 10000)
+#this is the set of structures that aren't in the relaxation set but that you want to know the energy of at the end. it's 
+holdout:
+  name: 'holdout'
+  lattice:
+    - "sc"
+    - "fcc"
+    - "bcc"
+    - "hcp"
+    - "protos"
+#  concs: [ [], [[0,1,2] , [0,1,4]] ]
+#  siteRestrictions: [['0/1'],['0/1','0/1']]
+  sizes: [[1,12],[1,6],[1,12]]
+  nconfigs: [100000,100000,100000,100000,all]
+fitting:
+  pot: 20g.mtp
+  dbs: ['*'] 
+  execution:
+    template: 'run_mtp_ml.sh'
+    time: 10 #wall time
+    ntasks: 1
+    nodes: 1 #a lot of these calcs run faster in parallel. in the ref Guide it will tell you how many nodes is good
+    mem_per_cpu: 50 #probably shouldn't need more than about 16 gb, but don't blame me if it uses more
+    job_name: 'Ni-Sb-Ti fitting' #change this to something good. 
+#  options:
+#    - "--qos=msg"
+#    - "-C knl"
+    modules: ['mpi/openmpi-1.8.5_intel-15.0.2','compiler_intel/2017']
+#   
+  fits:
+    - name: "AgPt" #change this to something good
+      dbs: ["*"]
+      steps:
+        - type: "mtp.MTP"
+          selection-limit: 200
+          split: "A"
+          species:
+            - "Ag" #change these to0
+            - "Pt"

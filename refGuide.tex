@@ -5,6 +5,15 @@
 \usepackage{float}
 \usepackage{longtable}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx} %for pictures
+\usepackage{eufrak} %for fancy neighborhood n
+\usepackage{indentfirst} %to indent the first paragraph after a title
+\usepackage{enumitem} %itemize spacing options
+\usepackage{textcomp} %for tildesssssss?????!!!
+\usepackage{nameref} %for referencing unnumbered sections by name
+\usepackage[section]{placeins} %float barriers
+\setlist[itemize]{nosep, leftmargin=.5cm, topsep=0pt, partopsep=0pt}
+\setlist[enumerate]{leftmargin=.5cm}
 
 \title{So You Want to do Materials Research:\\[0.02em]\smaller{}a
 guide to aBuild and the skills you need to use it}
@@ -14,61 +23,164 @@ guide to aBuild and the skills you need to use it}
 \maketitle
 \begin{abstract}
  The python module aBuild is meant to automate the process of
- building a mtp model for a paticular system. The documents presented
- in this folder/book are meant to be a reference guide to bash, git, aBuild, etc.
+ building an MTP model for a paticular system. The documents presented
+ in this folder/book are meant to be a reference guide to bash, git,
+ aBuild, etc. Disclaimer: we wrote this to help ourselves remember
+ these things, and as a favor to Brother Nelson. We reserve the right
+ for some of it to be incomplete or confusing at times. If you have
+ questions, don't be afraid to ask us or Brother Nelson. 
 \end{abstract}
 
 \section{Getting Started}
 To do computational research you will need to learn what the command
-line is and some bash commands--see the Bash Commands section. Go
-learn your commands it will make your life easier!!\\
-Now that you have learned the basics of the commandline environment it
-is time to utilize those skills to log into the supercomuter. If you
-have not yet made an account, go to marylou.byu.edu click on request
-and account. Your faculty mentor (most likely Brother Nelson) will
-need to approve your account. Once you have an account...
-If you are using mac or linux simply open the terminal and use the ssh
-command (see bash commands).  If you have a windows machine you have
-several options you can either use the ubuntu app, windows power
-shell, widows terminal, ,.... etc.
+line is and some bash commands--see \nameref{sec:bash}. Go
+learn your commands it will make your life easier!! 
+
+Now that you know the basics of the command line environment it is
+time to utilize those skills to log into the supercomuter. If you have
+not yet made an account, go to marylou.byu.edu click on request an
+account. Your faculty mentor (most likely Brother Nelson) will need to
+approve your account. The whole process may take a couple of
+days. Once you have an account, if you are using Mac or Linux simply
+open the terminal and use the ssh command (see
+\nameref{sec:bash}.). If you have a Windows machine you have several
+options: you can use the Ubuntu app, Windows power shell, Windows
+terminal, etc.   
 
 \subsection{Make directories}
 Once logged into the supercomputer you will need to build the
-following directories (See Bash Commands):\\
-\indent 1. \verb|\home\|codes\verb|\|aBuild\\
-\indent 2. \verb|\home\|bin\\
-\indent 3. \verb|\home\|environments\\
-\indent 2. \verb|\home\|Species-system (i.e. AgPt) 
+following directories (see \nameref{sec:bash}):
+\begin{itemize}
+  \item{\verb|\home\codes\aBuild|}
+  \item{\verb|\home\bin|}
+  \item{\verb|\home\environments|}
+  \item{\verb|\home\system-species| (i.e. AgPt)}
+\end{itemize}
+
+If you don't know what system you're gonna study, talk with Brother
+Nelson before you make your system-species folder. He'll help you find
+one to study. 
 
 \subsection{Download aBuild}
 Now it is time to download aBuild. The python module aBuild is meant
-to automate the process of building a mtp model for a paticular
-system. The module is continueuously undergoing improvements. To have
-version contronal we use git. If you are unfamiliar with git go read
-the git tutorial section. Git is an extreemly helpful tool and used
-across many different organizations. Once you become familiar with
-git, fork/download aBuild from 
-\subsection{Virtual Environment/bash\_script}
-Description of how to create a virtual environment and the need
-changes to the \verb|.bash_profile|.
+to automate the process of building a MTP model for a paticular
+system. The module is continuously undergoing improvements. To have
+version control we use git. If you are unfamiliar with git go read
+\nameref{sec:github}. Git is an extremely helpful tool and used across
+many different organizations. It's a skill you should add to your
+resume once you are familiar with it. Once you've learned how to,
+fork/download aBuild from https://github.com/lancejnelson/aBuild (see
+table \ref{git} for a quick refresher). 
 
-\subsection{Copy necessary Vasp information??}
+\subsection{Virtual Environment/bash\_profile}
+A convenient way to install and run software is in a virtual
+environment. Because aBuild is a software package, it needs to be
+installed for you to be able to run it. We will install it in a python
+virtual environment. This is how you will create a virtual environment
+and install aBuild:
+
+\begin{center}
+  \begin{longtable}{||p{7cm}|p{4cm}||} %longtable so it wraps %
+    % pages   
+    \caption{Making a virtual environment and installing aBuild}
+    \label{bashcommands}
+    \\ \hline
+    \textbf{Command} & \textbf{Description}\\ \hline \hline
+    \endhead
+    % make the previous page footer
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %make the last footer
+    \hline
+    \endlastfoot
+    %contents of the table
+    cd environments & go into that directory \\
+    python $-$m venv name\_of\_env	& make the environment\\
+    emacs .bash\_profile & edit your .bash\_profile \\
+    \verb|function workon {| & add these lines to it: \\
+    \verb|source ~/environments/$1/bin/activate| &	\$1 refers to
+                                                   the name of \\
+    \verb|}| & your virtual environment\\	
+    ctrl$+$x ctrl$+$c y & quit the editor\\
+    source .bash\_profile & update your .bash\_profile \\
+    workon name\_of\_env & enters your environment \\
+    python install -e \texttildelow\slash codes/aBuild & install
+      aBuild in your virtual environment \\
+    ctrl$+$d & exits your environment \\
+  \end{longtable}
+\end{center}
+
+Since we used the .bash\_profile to make the virtual environment work,
+I'll talk a little more about that now. Your .bash\_profile holds the
+settings that are applied each time you log in to the
+supercomputer. You can load software modules, change settings, and a
+lot of other things. Some helpful additions to your .bash\_profile are
+given here (actually I basically just copied and pasted my entire
+.bash\_profile here), although these were the current software modules
+on Marylou in Dec 2018, and I reserve the right to have old versions
+of the modules loaded, since it is probably not Dec 2018 anymore.
+
+\vspace{5mm}
+%\noindent
+\begin{itemize}
+  \item{export PATH$=$ \$ PATH:\texttildelow \slash bin}  
+  \item{PS1$=$``\textbackslash u:\textbackslash w\textbackslash \$ "}
+  \item{module load libfabric}
+  \item{module purge}
+  \item{module load compiler\_intel\slash 13.0.1}
+  \item{module load gdb\slash 7.9.1}
+  \item{module load gcc\slash 6.4}
+  \item{module load python\slash 3.6}
+  \item{export MAKESTRX$=$\texttildelow\slash bin\slash makestr.x}
+  \item{export GETKPTS$=$\texttildelow\slash bin\slash getKPoints}
+  \item{export ENUMX$=$\texttildelow\slash bin\slash enum.x}
+  \item{export F90$=$ifort}
+  \item{export HISTSIZE$=$100000}
+  \item{set completion-ignore-case on}
+  \item{function workon \{\\
+      source\texttildelow /environments/\$1/bin/activate\\
+      \} }
+  \item{alias hh$=$'history $|$ grep '}
+\end{itemize}
+
+\subsection{Copy other software packages}
+You'll need enum.x (.x means it's an executable file), makestr.x, and
+getKPoints. There may be copies of these in the group folder that you
+can copy to your bin. Ask Brother Nelson for help with this if there's
+not. 
 
 \section{Run aBuild: Training Process}                      
 Now that you have your account all set up, you are ready to start
-training the model to your specific system. The python module aBuild
-is designed to automate the train of the model process. This section
-will guild you through the different commands needed to train the model.\\
+training the model to your specific system. This section will guide
+you through the different commands needed to train the model. 
 
-The commands start with python ``builder.py **YMAL**" and then the
-various tags are used to step through the training process. The python
-command is only used for the tags denoted by the `-'.
+Your folder will need builder.py and a yaml file in it to run any of
+these commands. Copy these from 
+\verb|~/codes/aBuild/aBuild/templates/master.yml| and
+\verb|~/codes/aBuild/aBuild/scripts/builder.py|. Name your yaml
+something intuitive (e.g. if you're studying the silver gold system,
+maybe name it ``AgAu,'' etc..). Now you'll need to edit the yaml to
+make sure everything in there matches your system (such as the title,
+species, root, potcar directory, potcar versions, potcar setups,
+mindistance, concs, nconfigs, sizes, etc..). If you need help
+deciphering the yaml, go see the example.yml file in the
+aBuildReferenceGuide repository on git. It has a bunch of comments to
+help you understand what's going on, although you don't really need to
+understand what's going on to get started. 
+
+Now you can start building your model. You can see the steps in table
+\ref{algorithm} below. aBuild commands start with
+``\verb|python builder.py **YML**|" and then some tag(s). This prefix
+is only used for the tags denoted in this table by the `-'.  
 
 \begin{center}
   \begin{longtable}{||p{4cm}|p{7cm}||} %longtable so it wraps %
     % pages   
-    \caption{aBuild steps and description}
-    \label{bashcommands}
+    \caption{Algorithm steps and their descriptions.}
+    \label{algorithm}
     \\ \hline
     \textbf{Step} & \textbf{Description}\\ \hline \hline
     \endhead
@@ -82,107 +194,496 @@ command is only used for the tags denoted by the `-'.
     \hline
     \endlastfoot
     %contents of the table
-
-    -enum & Looks for possible crystal structures to
-            enumerate through \textcolor{red}{--run interactively}\\
-    -write -rgk & Build the training set folder and run
-                  the getKPoints script \textcolor{red}{--run interactively}\\
-    -setup\_train & Pull data from VASP folders, Builds
+    -enum & enumerates the crystalline structures up to sizes specified in your
+            yaml \textcolor{red}{--run interactively}\\ 
+    -setup\_relax & Builds to-relax.cfg and relax.ini; runs calc-grade
+                    \textcolor{red}{--run interactively}\\
+    qsub* jobscript\_relax.sh & mlp relax: needs to-relax.cfg, pot.mtp, and
+                                relax.ini; generates: relaxed.cfg,
+                                unrelaxed.cfg, and candidates.cfg \textcolor{red}{--job
+                    submission, parallel, 10-30 cores, 6-30 hrs}\\
+    -setup\_select\_add & Concatenates all of the candidate.cfg\_\#,
+                          selection.log\_\#, relaxed.cfg\_\# and
+                          unrelaxed.cfg\_\# into one file
+                          each. relaxed.cfg file should get bigger and
+                          bigger with each iteration. Also builds a
+                          submission script. \textcolor{red}{--run interactively}\\
+    qsub* jobscript\_select.sh & mlp select-add: generates:
+                              new\_training.cfg; needs: train.cfg,
+                              candidate.cfg \textcolor{red}{--job
+                              submission, single core, 1-4 hrs}\\
+    -add & builds A folders in training set and creates jobscript \textcolor{red}{--run interactively}\\
+    qsub* jobscript\_vasp.sh & runs vasp calculations for
+                                           the selected configurations
+                                            \textcolor{red}{--array
+                                            job, 6-30 hrs}\\
+    -setup\_train & Pulls data from VASP folders, builds
                     train.cfg and pot.mtp \textcolor{red}{--run interactively} \\
     qsub* jobscript\_train.sh & mlp train: needs train.cfg, pot.mtp;
                                 generates: Potential.mtp \textcolor{red}{--job
                     submission, parallel, 10-20 cores, 6-12 hrs}\\
-    -setup\_relax & Builds to-relax.cfg and relax.ini; runs calc-grade
-                    \textcolor{red}{--run interactively}\\
-    qusb* jobscript\_relax.sh & mlp relax: needs to-relax.cfg, pot.mtp, and
-                                relax.ini; generates: relaxed.cfg,
-                                unrelaxed.cfg, and candidates.cfg \textcolor{red}{--job
-                    submission, parallel, 10-30 cores, 6-30 hrs}\\
-    -setup\_select\_add & Concatenate all of the candidate.cfg\_\# into
-                          one candidate.cfg and remove all of the
-                          other ones,Concatenate all of the
-                          selection.log\_* files into one
-                          file. Concatenate all of the relaxed.cfg\_\#
-                          into one file.  This file should get bigger
-                          and bigger with each iteration, Build a
-                          submission script. candidate.cfg \textcolor{red}{--run interactively}\\
-    qsub* jobscript\_select & mlp select-add: generates:
-                              new\_training.cfg; need train.cfg,
-                              candidate.cfg \textcolor{red}{--job
-                              submission, single core, 1-4 hrs}\\
-    -add & builds A folders in training set and creates jobscript \textcolor{red}{--run interactively}\\
-    qsub* jobscript (inside training set) & runs vasp calculations for
-                                            unrelaxed configurations
-                                            \textcolor{red}{--array
-                                            job, 6-30 hrs}\\ 
-    go back to step -setup\_train & Repeat until model is fully
+    %go back to step -setup\_train & Repeat until model is fully
+    %                                trained, i.e. all structures relax.\\
+    go back to step -setup\_relax & Repeat until model is fully
                                     trained, i.e. all structures relax.\\
-                              
+  \end{longtable}
+\end{center}
+*For Marylou use sbatch instead of qsub
+**YML** is the yaml file without the .yml extension.
+
+The training process will begin with an empty training set. This will
+cause the relaxation to terminate for each structure on the first
+iteration. It will take several iterations before the model is able to
+relax all the configurations.
+
+The mlp relax step tries to relax the structures in the to relax
+set. If it extrapolates too much, it stops relaxing it, and adds the
+structure to a preselected set.
+
+The mlp select add step chooses from structures in candidate.cfg the
+structures that best fill the ``missing'' configuration space.
+
+The mlp train step tries fits a ``line'' to the training data it is
+given. I say ``line'' and not line because it is a non linear problem,
+but if it helps you to think of it like a line, do that. 
+
+\subsection{Other helpful MTP/aBuild commands}
+These might come in handy at some point
+\begin{center}
+  \begin{longtable}{||p{4cm}|p{7cm}||} %longtable so it wraps %
+    % pages   
+    \caption{aBuild commands and description}
+    \label{bashcommands}
+    \\ \hline
+    \textbf{Command} & \textbf{Description}\\ \hline \hline
+    \endhead
+    % make the previous page footer
+    \hline
+    \multicolumn{2}{||c||}
+    {\tablename\ \thetable\ -- \textit{Continued on next
+        page}} \\ \hline
+    \endfoot
+    %make the last footer
+    \hline
+    \endlastfoot
+    % contents of the table
+    -status & prints a status report for Vasp calculations \\
+    -report & creates data report file from completed Vasp
+                           calculations \\
+    -report -file path/to/file & creates data report file from the
+                           configurations contained in the file specified \\
+    -chull -file path/to/file & creates a convex hull from the data
+                           report file specified \\
+    mlp mindist file.cfg & prints the global minimum distance of the
+                           atoms to eachother in a .cfg file. Also
+                           adds the mindist attribute to structures in
+                           the .cfg file\\
+    mlp calc-grade pot.mtp train.cfg train.cfg temp.cfg & creates
+                           state.mvs, a file needed for relaxation \\
     
   \end{longtable}
 \end{center}
-*For Marylou use sbatch instead of qsub\\
-**YMAL** is the yml file without the .yml extension.
-
-The training process will take several iteration before the model is
-able to relax the atoms.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%More description of the relax and sequential steps
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Theory}
-In this section we discuss what the alogorithms are doing or the
-theory behind the computations. The overview picture is to create a
-MTP model from Vasp calculations. The Vasp calculations are ab initio
-or first principle calculations that us DFT and/or DFT+U depending on
-the specific system and if spin must be considered. The mtp then is
-trained by an optimzation fitting the coefficients of the basis
-functions--see MTP for more details. After the model has been trained
-it attempts to relax the atoms to their happen place. On the first
-iteration the model will likely be unable to relax an of the
-configurations. The model then selects more configurations to add to
-the train set. These configurations are then calculated using Vasp and
-the cycle continues until the model is able to relax all of the
-configurations.
+In this section we discuss what the algorithms are doing or the
+theory behind the computations. You don't really need to know any of
+this to get started working on this project, but if you're curious,
+(as you should be at some point, you're a scientist, after all) here's
+some info for you.
 
-The motivation of training a mtp model comes from the bottleneck of
-Vasp calculations. In searching for configurations to create the
-convex hull the configuration space for vary concentrations is so vast
-that using DFT calculation becomes impracticle due to the amount of
-time the calculation take. By using an mtp training model we are able
+The main idea is to create a MTP model from Vasp calculations. The
+Vasp calculations are ab initio or first principle calculations that
+use DFT and/or DFT+U depending on the specific system. The MTP then is
+trained by optimization, fitting the coefficients of the basis
+functions (see section \ref{sec:MTP}:MTP for more details). After the
+model has been trained it attempts to relax the atoms to their happy
+place. If it cannot relax the atoms and still accurately predict the
+energy, forces, and stresses, the model then selects more
+configurations to add to the training set. These configurations are
+then evaluated using Vasp and the cycle continues until the model is
+able to relax all of the configurations.
+
+The motivation of training a MTP model comes from the bottleneck
+caused by Vasp calculations. In searching for configurations to create the
+convex hull, the configuration space for varying concentrations is so vast
+that using DFT calculation becomes impractical. This is due to the amount of
+time the calculations take. By using an MTP training model we are able
 to explore much more of the configuration space in signicantly less
-time. Thus, allowing us to potentially discover new configurations of
-a paticular system. For further detail see ref \cite{} 
+time. This allows us to potentially discover new configurations of
+a paticular system.
 
-\subsection{MTP}
+DISCLAIMER: Some of this gets hard to understand. We hope that this
+document will be a nice introduction without too much scary stuff, but
+with that being said, don't go scaring yourself off by jumping into all
+of this too early. Each section has a statement that says ``stop
+reading here if you're not ready.'' Listen to these statements. 
+
+
+\subsection{MTP} \label{sec:MTP}
+MTP is an acronym for moment tensor potentials. It is a basis
+expansion, and it involves a bunch of tensors. For the purpose of
+doing this research, you don't really need to know a whole lot about
+it, except that it's a way to represent crystalline structures that is
+systematically improvable (meaning you can add more basis functions to
+get a better and better representation of the crystal) unlike
+classical potentials, and it is an off-lattice model (it isn't
+confined to some parent structure, the atoms can be located anywhere
+with respect to eachother), unlike cluster expansion. Basically it's a
+brand spanking new (published just last year), way better basis for
+crystal configurations than the previous methods (classical potentials
+and cluster expansion, mentioned earlier). Figure \ref{fig:2d} is a
+good cartoon visualization of what we're trying to accomplish with
+this model. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale = .4]{configVsEnergy}
+  \caption{ Simple 2-dimensional visualization of configuration
+    space vs. energy with a best fit ``line''. Each configuration is on
+    the x-axis with it's corresponding energy on the y-axis. In
+    reality this graph would be N+1 dimensional, where N is the
+    number of basis functions, $B_{\alpha} \left(\mathfrak{n} \right)
+    $.}
+  \label{fig:2d}
+\end{figure}
+
+This is your quitting point, but in case the previous paragraph isn't
+enough for you, here's a quick summary of the MTP basis, with a little
+math, but not very much explanation of the math. Sorry about that. In
+this github repository we will also include Bro. Nelson's report that
+has a really good explanation of the MTP basis, including a sample
+problem that can help you understand it if you want to.
+
+The moment tensor potential (MTP) basis is a set of orthogonal basis
+functions given by: 
+\begin{equation} \label{eq:basis}
+  V \left(\mathfrak{n} \right) = \sum\limits_{\alpha}
+  \xi_{\alpha}B_{\alpha} \left(\mathfrak{n} \right)
+\end{equation}
+
+The MTP basis can be used to represent crystalline configuration
+space. A crystalline structure can be evaluated on this basis to an
+arbitrary precision. A simple analogy to this kind of evaluation is
+the Fourier transform, where higher and higher frequencies can be
+added to make a better fit to any function. 
+
+The basis functions $B_{\alpha} \left(\mathfrak{n} \right) $ of the
+MTP basis depend on the set of moment tensor descriptors:
+\begin{equation} \label{eq:descriptors}
+  M_{\mu,\nu}\left(\mathfrak{n}_i\right) = \sum\limits_{j} f_{\mu}
+  \left( \left| \mathbf{r}_{ij} \right| ,z_i,z_j \right)
+  \underbrace{\mathbf{r}_{ij}\otimes...\otimes\mathbf{r}_{ij}}_{\nu
+     times}
+\end{equation}
+These descriptors are dependent on the immediate neighborhood,
+$\mathfrak{n}_i$, of the $i$th atom, within some $R_{cut}$, as shown
+in Figure \ref{fig:neighborhood}.  Each atom in the neighborhood of
+the $i$th atom introduces four degrees of freedom to the energy
+contribution, $V_i$. The total energy, $E$, depends on each energy 
+contribution, $V_i$. The four degrees of freedom are the three
+coordinates in Euclidean space of the separation between atoms $i$ and
+$j$, $r_{ij}$, and a discrete variable, $z_j$, that represents the
+species of the neighboring atom. %These moment tensor descriptors are
+%tensors of rank $J$, where $J$ is the number of atoms in the
+%neighborhood. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1.2]{neighborhood.jpg}
+  \caption{The $i$th atom's neighborhood is made up of each atom
+    within some $R_{cut}$ of itself. The total energy E is made up of
+    the contributions from individual neighborhoods. The energy
+    contribution, $V_i$, of neighborhood $\mathfrak{n}_i$ depends on
+    the separation between atoms $i$ and $j$, $r_{ij}$, and a discrete
+    variable, $z_j$, that represents the species of the atom in the
+    neighborhood (I or II in this illustration)
+    \cite{gubaev2019accelerating}. }
+  \label{fig:neighborhood}
+\end{figure}
+
+The $f_{\mu}\left( \left| \mathbf{r}_{ij} \right| ,z_i,z_j
+\right)$ term in Equation \ref{eq:descriptors} is given by:
+
+\begin{equation} \label{eq:someequation}
+  f_{\mu} \left( \mathbf{\rho} ,z_i,z_j \right) =
+  \sum\limits_{k}c_{\mu,z_i,z_j}^{\left( k \right)}Q^{\left( k \right)} \left(
+    \mathbf{\rho}
+  \right)
+\end{equation}
+where
+\begin{equation}  \label{eq:cheby}
+  Q^{\left(k\right)} \left( \mathbf{\rho} \right) =
+  T_k\left( \mathbf{\rho} \right)\left( R_{cut} - \mathbf{\rho}
+  \right)^2
+\end{equation}
+In Equation \ref{eq:cheby}, $T_k\left(  \mathbf{\rho} \right)$ are the
+Chebyshev polynomials on the interval $\left[ R_{min},R_{cut}\right]$.
+
+The $\mathbf{r}_{ij}\otimes...\otimes\mathbf{r}_{ij}$ terms in
+Equation \ref{eq:descriptors} contain angular information about the
+neighborhood $\mathfrak{n}_i$ and are tensors of rank $\mathbf{\nu}$.
+The basis functions $B_{\alpha} \left(\mathfrak{n} \right) $ are made
+up all of possible contractions of any number of
+$M_{\mu,\nu}\left(\mathfrak{n}_i\right)$ that result in a scalar. The
+maximum depth of these calculations is chosen, with more levels
+providing more accuracy. This attribute makes the basis a
+systematically improvable functional form, similar to including more
+frequencies in a Fourier transformation.
+
+The $\xi_{\alpha}$ and $c_{\mu,z_i,z_j}^{\left( k \right)}$ terms in
+Equations \ref{eq:basis} and \ref{eq:someequation} are parameters that must
+be optimized. A quasi-Newton optimization technique is used to fit
+these to the data provided by the training set.  The configuration
+space created by these basis functions is $N$ dimensional, where $N$
+is the number of basis functions the crystal was evaluated on. The
+optimization can be visualized in 2 dimensions, ``configuration'' vs
+energy, shown in Figure \ref{fig:2d}, where the appropriate terms are
+chosen to minimize the error of a best fit ``line'' to the training
+data.
+
+
+If you would like to know more, see ref
+\cite{gubaev2019accelerating}. There are several other less
+understandable (for undergraduates) papers that talk about the basis,
+in refs \cite{podryabinkin2017active,gubaev2018machine,
+  shapeev2016moment}. 
+
 
 \subsection{DFT}
+In quantum mechanics, the Schr\"{o}dinger equation must be solved to
+find the energy of a system. Because of the size of many body
+problems, it is impossible to solve the Schr\"{o}dinger equation
+exactly for the system. This leads scientists to an approximation
+called density functional theory (DFT). It is an ab-initio
+calculation, or a first-principles calculation, if you've ever heard
+those terms before. Density functional theory is based on the
+assertion that the ground state energy of a system is a unique
+functional (function of a function) of the electron density (which is
+a function) \cite{PhysRev.136.B864}.
+
+This is your quitting point. If you'd like to know more, go ahead and
+keep on reading!
+
+In this energy functional mentioned earlier, called the Kohn-Sham
+equation \cite{kohn1965self}, every term can be known exactly except
+the exchange-correlation (XC) functional.  
+
+The XC functional can be approximated in many different ways,
+including the Local Density Approximation (LDA), which assumes the
+electronic density behaves locally like a homogenous electron
+gas. Another approach is the Generalized Gradient Approximation (GGA),
+which is similar to LDA but includes the local gradient, and other
+derivative methods of these two basic methods.
+
+Because the Kohn-Sham equation depends on the electronic density and
+is also used to find the density, an iterative approach that
+converges to be self consistent is used to solve for the energy of the
+system.  DFT calculations are done in k-space, and sample points in
+the first Brillouin zone called k-points are chosen and appropriately
+weighted to replace the integrals in the Kohn-Sham equation. These are
+the KPOINTS files in your Vasp folders.
+
+\begin{figure}
+  \includegraphics[scale = .5]{PAW}
+  \caption{Comparison of atomic wave functions of Mn using the PAW
+    method (solid line) with the exact result (bullets) for a given
+    energy and angular momentum. Shown also are their differences
+    magnified by a factor of 10 (dash-dotted line), and their pseudo
+    wave functions (dashed line) \cite{PhysRevB.50.17953}. }
+  \label{fig:MnPAW}
+\end{figure} 
+
+The method of pseudopotentials is often used to reduce the
+computational load of DFT calculations. This method approximates the
+inner electrons as a ``frozen core'' that place the electrons
+surrounding them in an effective potential. The two common methods of
+this approximation are the projector augmented-wave (PAW) method and
+the UltraSoft PseudoPotential (USPP) method. The PAW method allows
+all-electrons orbitals to be reconstructed from the pseudo-orbitals,
+as shown in Figure \ref{fig:MnPAW}. 
+
+Vasp stands for the Vienna Ab initio Simulation Package
+\cite{kresse1996software}. This is the package we use to do DFT. Vasp
+requires the user to choose a method for approximating the XC
+functional. Vasp also prefers the use of the PAW method, but a
+specific PAW potential must be chosen. These are the POTCARS you
+specified in the yaml.
+
+This is pretty much all I understand about DFT. If you'd like to know
+more, there's a pretty good lecture series on Youtube:
+https://youtu.be/vJkNv095Aj8, and a good book you could read
+\cite{kitchin2008modeling}. 
+
 
 \subsubsection{DFT+U}
 
+With modeling large atoms (such as uranium), there can be some
+difficulties with getting the DFT calculations to converge to a
+``correct'' total energy. You probably won't use the method I'm about
+to talk about, so you probably don't need to read this section unless
+you've talked to Brother Nelson about modeling large atoms, or you're
+morbidly curious. Read on, if you want.
+
+This effect happens because the traditional treatment of electrons in
+DFT calculations allows the Coulomb repulsion to scatter the
+electrons, when in large atoms, the $d$ and $f$ electrons are strongly
+correlated and localized. Because the energy of the system is
+dependent upon the electron density, an incorrect density will often
+predict an energy that is too high. 
+ 
+To remedy the traditional treatment of electrons in large atoms, DFT+U
+should be used. DFT+U is also known as LDAU. Without the addition of
+the U parameter to DFT calculations, the calculation may converge,
+but it will likely converge to a non-physical solution. 
+
+The recommended method to ensure DFT+U converges to the
+``correct'' total energy is to follow a ramping scheme discussed in ref
+\cite{meredig2010method} that begins with a U parameter of 0 and ramps
+up to 4.5 (in steps of 1, e.g. $0\Rightarrow 1\Rightarrow 2\Rightarrow
+3\Rightarrow 4\Rightarrow 4.5$), using the charge density calculated in
+the previous iteration. This helps ensure convergence to a ``true''
+total energy. 
+
+These are the settings in the INCAR that must be used to employ DFT+U:
+\begin{itemize}
+  \item{ENCUT = 550 }
+  \item{LWAVE = False }
+  \item{ LDAU = True }
+  \item{ LDAUTYPE = 1 }
+  \item{ LDAUL = 3 -1 -1 }
+  \item{ LDAUU = \# 0 0 (\# changes with ramping scheme)}
+  \item{ ICHARG = 1 (after the first iteration of ramping scheme)}
+  \item{ LDAUJ = 0.51 0 0 }
+  \item{ ISMEAR = -5 }
+  \item{ LMAXMIX = 6 }
+  \item{ ISIF = 2 }
+  \item{ NSW = 0 }
+\end{itemize}
+
 \subsection{Optimization Routines}
+Optimization has to do with finding the best choice of some possible
+options. That's a really broad concept, but with relation to what we
+are doing, we want to minimize the error of a best fit line. We create
+a best fit ``line'' of energy vs. structure (remember figure
+\ref{fig:2d}?) This is a really simplified explanation of what the
+algorithm is actually doing, because a structure is decomposed into a
+set of $N$ basis functions, and each basis function has a rank $n$ tensor
+(where $n$ is the order of the system, e.g. binary, ternary) that also
+has to be optimized with it, so it's not a linear system. 
+
+The optimization scheme used to train the model is called BFGS. It
+stands for Broyden-Fletcher-Goldfarb-Shanno. And now we're at your
+quitting point. Feel free to keep reading if you're very curious (good
+for you):
+
+The BFGS algorithm is called a Quasi-Newton method, and is
+based on the Newton method of optimization, which uses the Taylor
+expansion of a function out to two derivatives, takes the partial with
+respect to $ \Delta x $ and iteratively searches for the value of x that
+makes the resulting function equal 0. This is the same as finding
+where the derivative of a function equals 0. For the Newton method, we
+need to find the second derivative to make this equation. For a
+multivariable function, the second derivative is the Hessian
+matrix. This matrix can be expensive to calculate, and thus
+Quasi-Newton methods were developed, which approximate the Hessian in
+one way or another. The BFGS algorithm requires an initial guess for 
+the Hessian (usually an identity matrix of appropriate dimension) and
+iteratively approximates a new one as it solves for the $x$ that
+minimizes the function. The equation for the Hessian matrix that the
+BFGS algorithm uses is as follows:
+
+\begin{equation}
+  B_{k+1}= B_k + \frac{y_k y_k^T}{y_k^T s_k} - \frac{B_k s_k s_k^T
+    B_k^t}{s_k^T B_k s_k}
+\end{equation}
+
+\noindent
+with $ y_k = \nabla f ( \, x_{k+1} ) \, - \nabla f ( \, x_k ) \, $ and $ s_k =
+x_{k+1}-x_k $.
+
+The algorithm essentially finds a step direction (direction of
+steepest descent), finds an acceptable step size (backtracking line-search
+algorithm), takes the step, and then solves for the approximate
+Hessian matrix until the new $x$ value and the old one are close enough
+to each other, according to some epsilon value.
+
+The backtracking line-search algorithm start with a maximum step size,
+and makes it smaller by some factor $ \tau \in ( \, 0,1 ) \, $ until it
+satisfies what is called the Armijo-Goldstein condition, as follows:
+
+\begin{equation}
+  f ( \, x + \alpha p ) \, \leq \alpha c m
+\end{equation}
+
+\noindent
+where $ m = p^T \nabla f ( \, x ) \, $ and $ c \in ( \, 0,1 ) \, $
+is some control parameter.
+
+Are you happy you read to the end of this section? 
 
 \subsection{Convex Hull}
+This is actually an important section. Go ahead and read the whole
+thing if you get this far.
 
-\subsection{}
+A convex hull is a cool mathematical tool, but it also has physical
+importance. See figure \ref{fig:AgAuAFLOW} for a visualization. The
+convex hull has some hints to what it is in it's name (for once a
+useful name for something). It is constructed of the lowest energy
+structures of a system that can be connected with a line that is
+convex. It looks like the hull of a boat. The breaking points of the
+convex hull represent the ground state structures of a system. (If you
+didn't know, you can't actually make a crystalline structure with any
+concentration of materials. For example, there is such thing as
+$\mathrm{UO}_2$ and $\mathrm{U}_3\mathrm{O}_8$, but there is no such
+thing as $\mathrm{U}_3\mathrm{O}_2$).
 
-\section{Bash Commands}
+\begin{figure}[t!]
+  \centering
+  \includegraphics[scale=.3]{AgAuAFLOW.png}
+  \caption{Convex hull of Ag-Au system as determined by 294
+    high-throughput ab initio calculations
+    \cite{curtarolo2012aflowlib}. }
+  \label{fig:AgAuAFLOW}
+\end{figure}
 
-First things first, you need to learn to navigate your command
-line. Macs have a built in command line (terminal). On Windows, there
-are several options:\\
-\indent 1. Windows Powershell. See:
-https://docs.microsoft.com/en-us/windows-
-server/administration/windows-commands/powershell
-for instructions on how to configure your pc to use it.\\
-\indent 2. The Ubuntu app--simply search for it in your windows store.\\
-\indent 3. Windows recently came out with Windows Terminal as a 
-central place for all the commandline userfaces.\\ 
-\indent 4. Other apps such as:...\\
-Bash allows to add input into the computer from a powerfull
-commandline. See Table
-\ref{bashcommands} for a list of helpful commands. 
+I lied to you. This is your quitting point, don't bother reading this unless you're doing a
+ternary system (which you very well may be doing...). A three body system's convex hull
+is the same thing mathematically, but is maybe a bit harder to
+visualize because to see all of it you need 3 dimensions.  But you can
+represent it in 2 dimensions, like in figure \ref{fig:3dchull}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{3dchull.jpg}
+  \caption{Convex hull of Convex hull of the Co-Nb-V system
+    constructed by MTP in the Co-rich region
+    \cite{gubaev2019accelerating}.  }
+  \label{fig:3dchull}
+\end{figure}
+
+% \subsection{}
+
+\FloatBarrier
+
+\section*{Appendix A: Bash Commands} \label{sec:bash}
+
+To do any of this work, you need to learn to navigate your command
+line. Macs and Linux have a built in command line (terminal). On
+Windows, there are several options:
+\begin{enumerate}
+  \item{Windows Powershell. See:
+      https://docs.microsoft.com/en-us/windows-
+      server/administration/windows-commands/powershell
+      for instructions on how to configure your pc to use it.}
+  \item{The Ubuntu app--simply search for it in your windows store.}
+  \item{Windows recently came out with Windows Terminal as a 
+      central place for all the command line userfaces.}
+  \item{If you know any other apps, feel free to use them}
+\end{enumerate}
+Your command line allows you to communicate with your machine by
+typing. The language you use is called bash, and if you want to make a
+script to execute bash commands, you call it a shell script. See Table
+\ref{bashcommands} for a list of helpful commands.  
 
 \begin{center}
   \begin{longtable}{||p{5.5cm}|p{5.5cm}||} %longtable so it wraps pages
@@ -279,49 +780,54 @@ commandline. See Table
   \end{longtable}
 \end{center}
 
-\subsection{Bash Loops}
+\subsection*{Bash Loops}
 
-Here's a table \ref{loops} of basic bash loops and logic, and a
-basic example \ref{loopexample} that relates to what we do.
+Here's a table of basic bash loops and logic, and a basic example in
+Table \ref{loopexample} that relates to what we do. 
 
 \begin{center}
   \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
     \caption{Loops in bash}
     \label{loops}
-    %first header
+    %make the main header
     \\ \hline
     \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endfirsthead
-    %next page header
+    %make the next page header
     \hline
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued from previous page}}
     \\ \hline
     \textbf{Command} & \textbf{What it does}\\ \hline \hline
     \endhead
-    % footer
-    \\ \hline
+    % make the previous page footer
     \multicolumn{2}{||c||}
     {\tablename\ \thetable\ -- \textit{Continued on next
         page}} \\ \hline
     \endfoot
-    %last footer
+    %make the last footer
     \hline
     \endlastfoot
-    %contents of table
-      \verb|for i in {1..100}| & for 100 iterations \\
-      \verb|do|& \\
-      \verb|command $i| & do this thing(\verb|$i| \\
-      \verb|done| & references the index)\\
-      \hline
-      \verb|if [ condition ]| & check the condition \\
-      \verb|then| & if it's true \\
-      \verb|command| & do this \\
-      \verb|else| & if it's not \\
-      \verb|command| & do this \\
-      \verb|fi| & \\
-      \hline
-      \verb|if [ -e file ] |& check if a file exists \\
+    %contents of the table
+    \verb|for i in {1..100}| & for 100 iterations \\
+    \verb|do|& \\
+    \verb|command $i| & do this thing (\verb|$i|references the index) \\
+    \verb|done| & \\
+    \hline
+    \verb|for i in `ls -d */`| & for every directory in this
+                                   directory \\
+    \verb|do| & \\
+    \verb|cd $i| & cd into every directory \\
+    \verb|...| & \\
+    \hline
+    \verb|if [ condition ]| & check the condition \\
+    \verb|then| & if it's true \\
+    \verb|command| & do this \\
+    \verb|else| & if it's not \\
+    \verb|command| & do this \\
+    \verb|fi| & \\
+    \hline
+    \verb|if [ -e file ] |& check if a file exists \\
   \end{longtable}
 \end{center}
 
@@ -352,24 +858,24 @@ basic example \ref{loopexample} that relates to what we do.
     \verb|do| & \\
     \verb|cd E.$i| & enter the directory named
     \verb|E.#|\\
-    \verb|if [ -e KPOINTS ]| & if KPOINTS doesn't exist
+    \verb|if [! -e KPOINTS ]| & if KPOINTS doesn't exist
     \\
     \verb|echo $i| & print the directory number \\
     \verb|getKPoints| & run the getKPoints script \\
     \verb|fi|
     \verb|cd ..| & go back one directory \\
-    \verb|done|
+    \verb|done|& \\
   \end{longtable}
 \end{center}
 
 
-\section{Emacs}
+\section*{Appendix B: Emacs} \label{sec:emacs}
 
 Emacs is a text editor that has a bunch of cool shortcuts you can
 learn to make editing documents super easy. On a Mac you can download
 Aquamacs, which uses the same commands as Emacs but you can click with
-your mouse. \ref{emacs} Has a chart of basic Emacs
-commands. \ref{aquamacs} has a list of Aquamacs specific things. 
+your mouse. \ref{emacs} has a chart of basic Emacs
+commands.
 
 \begin{center}
   \begin{longtable}{||p{4.5cm}|p{6.5cm}||}%longtable so it wraps pages
@@ -409,57 +915,7 @@ commands. \ref{aquamacs} has a list of Aquamacs specific things.
   \end{longtable}
 \end{center}
 
-
-
-%%%% DON'T KNOW WHERE THIS BELONGS IN THIS DOCUMENT BUT I'M GONNA TYPE
-%%%% IT UP SO THAT WE HAVE IT AND CAN PLACE IT LATER
-
-How to make and use a virtual environment to run python interactively, table \ref{venv}.
-
-\begin{center}
-  \begin{longtable}{||p{6.5cm}|p{4.5cm}||}
-    \caption{Build a virtual environment}
-    \label{venv}
-    %first header
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endfirsthead
-    %next page header
-    \hline
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endhead
-    %footer
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\ \hline
-    \endfoot
-    %last footer
-    \hline
-    \endlastfoot
-    %contents of table
-    \verb|mkdir environments| & make a directory to hold your
-    environments \\ \hline
-    \verb|cd environments| & go to that directory \\ \hline
-    \verb|python -m venv name_of_env| & make the
-    environment \\ \hline
-    \verb|emacs .bash_profile| & edit your
-    \verb|.bash_profile|\\ \hline
-    \verb|function workon {| & add these lines to it \\
-      \verb|source ~/environments/$1/bin/activate| & \\
-      \verb|}| & \\ \hline
-    ctrl+x ctrl+c y & save and quit the editor \\ \hline
-    \verb|source .bash_profile| & update your
-    \verb|.bash_profile|\\ \hline
-    \verb|workon name_of_env| & enters your environment
-    \\ \hline
-    ctrl+d & exits your environment \\ \hline
-  \end{longtable}
-\end{center}
-
-\section{Basics of Github}
+\section*{Appendix C: Basics of Github} \label{sec:github}
 
 This section is by no means comprehensive. In fact, there's probably a
 lot of things missing. If you'd like to actually get good at Github,
@@ -480,11 +936,12 @@ powerful code sharing tool, but takes a little getting used to.
 First you need to go make a Github account. Then you can fork (make a
 copy of) whatever repository of code that you want to copy and
 edit. If you don't want to make edits to the code yourself, you don't
-have to make a fork, you can just copy directory from the original
+have to make a fork, you can just copy directly from the original
 repository each time.
 To give your computer (or a remote computer) access to your repositories
 on Github, add your computer's public SSH key to Github. How to do
 this:
+
 On your command line execute the following command to copy
 your public ssh key:
 \begin{verbatim}
@@ -495,8 +952,9 @@ need to generate one. See the subsection below this for instructions
 on how to do that. 
 
 Now you will be able to paste this key into your account on Github. To
-do this, go to Settings>SSH and GPG keys>New SSH key. Make sure you
-name it something intuitive (e.g. My Mac, Marylou, etc.).
+do this, go to Settings$\Rightarrow$SSH and GPG keys$\Rightarrow$New
+SSH key. Make sure you name it something intuitive (e.g. My Mac,
+Marylou, etc.). 
 
 Now you can copy code from Github to your machine. It's
 probably a good idea to make a directory to hold all the stuff you're
@@ -520,6 +978,7 @@ fork to your machine using the following command:
 \begin{verbatim}
 git remote add master git@github.com:user/repository.git
 \end{verbatim}
+2.
 b. If you have your own code that you would like to edit and put on
 Github for others to see, you will have to make your own repository on
 Github, then use the same command as above.
@@ -534,7 +993,7 @@ git remote add upstream git@github.com:user/repository.git
 
 Now that you have a copy of the code, here's how to make changes to
 the code on your machine, and on Github from your machine. Here's a
-list of some basic Git commands \ref{git}. Remember that this is not a
+list of some basic Git commands. Remember that this is not a
 comprehensive list.
 
 \begin{center}
@@ -581,101 +1040,11 @@ comprehensive list.
 
 Note: Atlassian has a good Git tutorial and reference guide. 
 
-\subsection{SSH key generation}
+\subsection*{SSH key generation}
 
 %%%%% WE NEED TO FIGURE OUT HOW TO DO THIS AGAIN. CAN'T FIND THE
 %%%%% WEBPAGE WE RECEIVED OUR INSTRUCTIONS FROM
-See https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent\#generating-a-new-ssh-key
-
-\section{Initialization Process}
-To start working there are a series of steps and proceedure that must
-be followed. The first step is to obtain an account to the supercomputer--likely
-marylou. After setting up and account and logging on, you will need to
-make several directories and download aBuild.  
-\subsection{aBuild Download}
-1. Become familiar with git --see git tutorial
-
-\subsubsection{bin directory}
-
-\section{aBuild tags} %I don't know if this needs to be it's own
-% section. Just wanted to make a table of
-% dependencies and didn't know where it should
-% go.
-
-%%%%% The following two tables might be better suited to be
-%%%%% combined. It would create the dependencies for the workflow so
-%%%%% you'd know what order to execute all the commands in.
-
-\begin{center}
-  \begin{longtable}{||p{3cm}|p{4cm}|p{4cm}||}
-    \caption{aBuild tag dependencies}
-    \label{aBuilddepend}
-    %first header
-    \\ \hline
-    \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\ \hline \hline
-    \endfirsthead
-    %next page header
-    \hline
-    \multicolumn{3}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
-    \\ \hline
-    \textbf{Tag:} & \textbf{Needs:} & \textbf{Generates:}\\\\ \hline \hline
-    \endhead
-    %footer
-    \multicolumn{3}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\ \hline
-    \endfoot
-    %last page footer
-    \hline
-    \endlastfoot
-    %contents of table
-    \verb|-write| & \verb|.yml| file & VASP input files \\ \hline
-    \verb|-setup_train| & VASP output files & \verb|train.cfg| \\ 
-    & \verb|Potential.mtp| & \verb|pot.mtp| \\ \hline
-    \verb|-setup_relax| & %I think something goes here but not
-    % sure
-    &\verb|to_relax.cfg| \\
-    & & \verb|relax.ini| \\ \hline
-    \verb|-setep_select_add| & %???
-    & \verb|candidate.cfg| \\ \hline
-    \verb|-add| & \verb|new_training.cfg| & VASP input files \\ \hline
-  \end{longtable}
-\end{center}
-
-\begin{center}
-  \begin{longtable}{||p{3cm}|p{4cm}|p{4cm}||}
-    \caption{mlp command dependencies}
-    \label{mlpdepend}
-    % first header
-    \\ \hline
-    \textbf{Command} & \textbf{Needs} & \textbf{Generates}\\ \hline \hline
-    \endfirsthead
-    %next page header
-    \hline
-    \multicolumn{3}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
-    \\ \hline
-    \textbf{Command} & \textbf{Needs} & \textbf{Generates}\\ \hline \hline
-    \endhead
-    %footer 
-    \multicolumn{3}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\ \hline
-    \endfoot
-    %last page footer
-    \hline
-    \endlastfoot
-    %contents of table
-    \verb|train| & \verb|train.cfg| & \verb|Potential.mtp| \\
-    & \verb|pot.mtp| & \\ \hline
-    \verb|relax| & \verb|to_relax.cfg| & \verb|relaxed.cfg| \\
-    &\verb|relax.ini| & \verb|unrelaxed.cfg| \\
-    & \verb|pot.mtp| & \verb|candidates.cfg| \\ \hline
-    \verb|select-add| & \verb|train.cfg| & \verb|new_training.cfg| \\
-    & \verb|candidate.cfg| & \\ \hline
-  \end{longtable}
-\end{center}
+See https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent\#generating-a-new-ssh-key 
 
 \bibliographystyle{ieeetr}
 \bibliography{refs}
