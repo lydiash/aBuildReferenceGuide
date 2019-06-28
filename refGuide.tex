@@ -853,6 +853,16 @@ script to execute bash commands, you call it a shell script. See Table
     \verb|!command| & executes the most recent command
     that starts with the letters you typed \\ \hline
     \verb|echo something| & print something to the screen \\\hline
+    \verb|ls -altr| & see when files in the directory were last
+                      altered \\\hline
+    \verb|sed -i 's/to replace/new| & find and replace a phrase in a
+                                      file \\
+    \verb|phrase/' file/to/search| & \\ \hline
+    \verb|grep -Rl keyword| & recursively search for a keyword and
+                              print the file it was found in \\\hline
+    \verb|awk '!a[$0]++' file/to/search| & get rid of duplicate lines
+    \\\hline
+    \verb|echo "phrase" >> file/to/append| & append a phrase to a file \\\hline
   \end{longtable}
 \end{center}
 

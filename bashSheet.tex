@@ -101,8 +101,9 @@
     \verb|echo something| & print something to the screen \\\hline
     \verb|ls -altr| & see when files in the directory were last
                       altered \\\hline
-    \verb|sed -i 's/to replace/new phrase/' file/to/search| & find and
-                                                              replace a phrase in a file \\\hline
+    \verb|sed -i 's/to replace/new| & find and replace a phrase in a
+                                      file \\
+    \verb|phrase/' file/to/search| & \\ \hline
     \verb|grep -Rl keyword| & recursively search for a keyword and
                               print the file it was found in \\\hline
     \verb|awk '!a[$0]++' file/to/search| & get rid of duplicate lines
@@ -194,10 +195,12 @@
     \verb|command| & do this \\
     \verb|else| & if it's not \\
     \verb|command| & do this \\
-    \verb|fi| & ends if statement \\
-    \verb|if [ -e file ] |& check if a file exists \\
-    \verb|for i in `ls -d */`; do cd $i; command; cd ..; done| &enter
-                                                                 every directory in the current directory \\
+    \verb|fi| & ends if statement \\ \hline
+    \verb|if [ -e file ] |& check if a file exists \\ \hline 
+    \verb|for i in `ls -d */`| & visit every directory in the current \\
+    \verb|do cd $i| & directory \\
+    \verb|command| & and execute some command \\
+    \verb|cd .. done| & \\ \hline
     \hline
   \end{longtable}
 \end{center}
@@ -224,43 +227,7 @@
     %last page footer
     \hline
     \endlastfoot
-    \verb|for i in {1..100}| & for 100 times \\
-    \verb|do| & \\
-    \verb|cd E.$i| & enter the directory named
-    \verb|E.#|\\
-    \verb|if [ -e KPOINTS ]| & if KPOINTS doesn't exist
-    \\
-    \verb|echo $i| & print the directory number \\
-    \verb|getKPoints| & run the getKPoints script \\
-    \verb|fi|
-    \verb|cd ..| & go back one directory \\
-    \verb|done|& close loop\\
-  \end{longtable}
-\end{center}
-
-\begin{center}
-  \begin{longtable}{||p{4.5cm}|p{6.5cm}||}
-    \caption{Example of a Bash loop}
-    %first header
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endfirsthead
-    %next page header
-    \hline
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued from previous page}}
-    \\ \hline
-    \textbf{Command} & \textbf{What it does}\\ \hline \hline
-    \endhead
-    %footer
-    \multicolumn{2}{||c||}
-    {\tablename\ \thetable\ -- \textit{Continued on next
-        page}} \\ \hline
-    \endfoot
-    %last page footer
-    \hline
-    \endlastfoot
-    for i in \`{}ls -d */\`{} & for all directories \\
+    \verb|for i in `ls -d */`| & for all directories \\
     \verb|do| & \\
     \verb|cd $i| & enter the directory named\\
     \verb|if [! -f KPOINTS]|& if KPOINTS doesn't exist\\
