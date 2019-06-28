@@ -15,6 +15,11 @@ calculator:
   #You'll probably only need vasp here
   active: 'vasp_and_lammps_and_qe' 
   vasp:
+    #If your system of choice has atoms with a non-zero magnetic moment (is ferromagnetic), you should assign it
+    #a magmom here. 2 is a good choice. Otherwise comment this section out.
+    FM:
+      Ag: 2
+      Pt: 0
     #in very special cases you might need this AFM section. Otherwise comment it out
     AFM: #if you'd like to make a structure antiferromagnetic, specify the details here
       plane: [1,0,0] #plane to align spin on 
