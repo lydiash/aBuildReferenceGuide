@@ -1,5 +1,5 @@
 #name this anything you'd like, but this is a nice convention to follow
-title: 'AgPd Alloy Database' 
+title: 'AuPt Alloy Database' 
 # Ordered list of species; this is the same order as should be in the
 # POTCAR file for VASP calculations. You can have 2 or 3
 species:
@@ -89,9 +89,9 @@ calculator:
     job_name: 'Hf-Ni-Si DB' #Change this for your system. It's what the job will be called 
   #  partition: 'physics'
     array_limit: 150 #if you want to let only a certain amount of calcs in a job array to run at once. 
-    #this is the command that will be executed. you may want to add a "> vasp_output" so the output
+    #this is the command that will be executed. 
+    exec_path: 'vasp6.x' #you may want to add a "> vasp_output" so the output
     #gets written to a file called vasp_output
-    exec_path: 'vasp6.x' 
   #  options:
   #    - "--qos=msg"
   #    - "-C knl"
